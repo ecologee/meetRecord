@@ -8,15 +8,12 @@
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#1a1a1a;background:#f5f4f0;padding:2rem 1rem}
 .page{max-width:860px;margin:0 auto}
-
-/* ── 공통 ── */
 .card{background:#fff;border:0.5px solid #d3d1c7;border-radius:12px;padding:1.25rem;margin-bottom:12px}
 .stitle{font-size:12px;font-weight:500;color:#5f5e5a;text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px}
 .badge{font-size:11px;padding:2px 8px;border-radius:8px;border:0.5px solid transparent}
 .b-blue{background:#E6F1FB;color:#0C447C;border-color:#B5D4F4}
 .b-teal{background:#E1F5EE;color:#085041;border-color:#9FE1CB}
 .b-gray{background:#f0ede6;color:#5f5e5a;border-color:#d3d1c7}
-.b-amber{background:#FAEEDA;color:#633806;border-color:#FAC775}
 .btn{font-size:13px;padding:7px 14px;border-radius:8px;border:0.5px solid #d3d1c7;background:#fff;color:#1a1a1a;cursor:pointer;transition:background .15s}
 .btn:hover{background:#f0ede6}
 .btn:disabled{opacity:.4;cursor:not-allowed}
@@ -25,6 +22,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#1
 .btn-sm{font-size:12px;padding:4px 10px}
 .btn-danger{color:#A32D2D;border-color:#F7C1C1;background:#FCEBEB}
 .btn-danger:hover{background:#f7c1c1}
+.btn-outline{background:transparent;border-color:#d3d1c7;color:#5f5e5a}
 input[type=text],input[type=password],input[type=url],textarea,select{font-size:13px;padding:7px 10px;border:0.5px solid #d3d1c7;border-radius:8px;background:#f0ede6;color:#1a1a1a;outline:none;width:100%}
 input:focus,textarea:focus{border-color:#b4b2a9;background:#fff}
 textarea{resize:vertical;font-family:inherit}
@@ -32,18 +30,25 @@ textarea{resize:vertical;font-family:inherit}
 .row{display:flex;gap:8px;align-items:flex-start;flex-wrap:wrap}
 .flex1{flex:1;min-width:0}
 .divider{height:0.5px;background:#d3d1c7;margin:14px 0}
-.status-row{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:12px;color:#5f5e5a}
+.status-row{display:flex;align-items:center;gap:8px;font-size:12px;color:#5f5e5a}
 .dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;background:#d3d1c7}
 .dot.ok{background:#639922}.dot.err{background:#E24B4A}.dot.spin{background:#378ADD;animation:sp 1s ease-in-out infinite}
 @keyframes sp{0%,100%{opacity:.3}50%{opacity:1}}
 
-/* ── 관리자 패널 ── */
+/* 토큰 저장 상태 배지 */
+.token-saved-badge{font-size:11px;padding:2px 10px;border-radius:20px;background:#E1F5EE;color:#085041;border:0.5px solid #9FE1CB;display:inline-flex;align-items:center;gap:4px}
+.token-saved-badge.none{background:#f0ede6;color:#888780;border-color:#d3d1c7}
+
+/* 관리자 패널 */
 #adminWrap{display:none;margin-bottom:1.5rem}
 #adminWrap.show{display:block}
 .admin-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:8px}
 .admin-header h2{font-size:18px;font-weight:500}
 .info-box{background:#E6F1FB;border:0.5px solid #B5D4F4;border-radius:8px;padding:.75rem 1rem;font-size:12px;color:#0C447C;line-height:1.7;margin-bottom:14px}
 .info-box code{background:#d4e8f7;padding:1px 5px;border-radius:4px;font-size:11px}
+.warn-box{background:#FAEEDA;border:0.5px solid #FAC775;border-radius:8px;padding:.75rem 1rem;font-size:12px;color:#412402;line-height:1.6;margin-bottom:14px}
+
+/* 편집 카드 */
 .meeting-edit-list{display:flex;flex-direction:column;gap:8px}
 .edit-card{background:#fff;border:0.5px solid #d3d1c7;border-radius:10px;overflow:hidden}
 .edit-card-head{display:flex;align-items:center;gap:10px;padding:.75rem 1rem;cursor:pointer;background:#f5f4f0}
@@ -56,26 +61,18 @@ textarea{resize:vertical;font-family:inherit}
 .edit-card.open .edit-body{display:block}
 .edit-section{margin-bottom:1.25rem}
 .edit-section:last-child{margin-bottom:0}
-.edit-label{font-size:12px;font-weight:500;color:#5f5e5a;margin-bottom:6px;display:flex;align-items:center;gap:6px}
-/* 링크 */
+.edit-label{font-size:12px;font-weight:500;color:#5f5e5a;margin-bottom:6px}
 .link-item{display:flex;gap:6px;align-items:center;margin-bottom:6px}
 .link-item input{flex:1}
-/* 파일 */
-.file-list{display:flex;flex-direction:column;gap:6px;margin-bottom:8px}
-.file-item{display:flex;align-items:center;gap:8px;padding:6px 10px;background:#f0ede6;border-radius:6px;font-size:12px}
-.file-item a{color:#185FA5;text-decoration:none;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.file-item a:hover{text-decoration:underline}
+.file-list-item{display:flex;align-items:center;gap:8px;padding:6px 10px;background:#f0ede6;border-radius:6px;margin-bottom:6px;font-size:12px}
+.file-list-item a{color:#185FA5;text-decoration:none;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .file-size{color:#888780;font-size:11px;white-space:nowrap}
-.upload-zone{border:1.5px dashed #d3d1c7;border-radius:8px;padding:1rem;text-align:center;cursor:pointer;transition:all .15s;font-size:13px;color:#888780}
+.upload-zone{border:1.5px dashed #d3d1c7;border-radius:8px;padding:1rem;text-align:center;cursor:pointer;font-size:13px;color:#888780;transition:all .15s}
 .upload-zone:hover,.upload-zone.drag{border-color:#378ADD;background:#E6F1FB;color:#0C447C}
-.upload-zone input{display:none}
-.upload-progress{font-size:12px;color:#185FA5;margin-top:6px;display:none}
-
-/* 전체 동기화 */
+.upload-progress{font-size:12px;color:#185FA5;margin-top:6px;display:none;min-height:16px}
 .sync-bar{display:flex;align-items:center;gap:10px;padding:1rem;background:#f0ede6;border-radius:10px;flex-wrap:wrap}
-.sync-bar .flex1{font-size:13px;color:#5f5e5a}
 
-/* ── 허브 뷰어 ── */
+/* 허브 뷰어 */
 .hub-title{font-size:20px;font-weight:500;margin-bottom:4px}
 .hub-sub{font-size:13px;color:#5f5e5a;margin-bottom:1.25rem}
 .search-bar{display:flex;gap:8px;margin-bottom:.75rem;flex-wrap:wrap}
@@ -127,17 +124,12 @@ ul.pts li::before{content:"·";position:absolute;left:0;color:#b4b2a9}
 .risk-item{border-left:3px solid #E24B4A;border-radius:0 6px 6px 0;background:#FCEBEB;padding:6px 10px;margin-bottom:6px;font-size:12px;color:#501313;line-height:1.5}
 .opp-item{border-left:3px solid #639922;border-radius:0 6px 6px 0;background:#EAF3DE;padding:6px 10px;margin-bottom:6px;font-size:12px;color:#173404;line-height:1.5}
 .sec-label{font-size:11px;font-weight:500;color:#5f5e5a;text-transform:uppercase;letter-spacing:.05em;margin:1rem 0 6px}
-/* 메모 탭 */
 .memo-box{background:#FAEEDA;border-radius:8px;padding:1rem;font-size:13px;line-height:1.8;color:#412402;white-space:pre-wrap;word-break:break-word}
-/* 첨부 탭 */
 .attach-link{display:flex;align-items:center;gap:8px;padding:8px 10px;background:#f0ede6;border-radius:6px;margin-bottom:6px;font-size:13px;text-decoration:none;color:#185FA5}
 .attach-link:hover{background:#e6e2d8}
-.attach-link .icon{font-size:14px;flex-shrink:0}
-.attach-link .label{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.attach-link .meta{font-size:11px;color:#888780;white-space:nowrap}
+.attach-link .lbl{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .attach-file{display:flex;align-items:center;gap:8px;padding:8px 10px;background:#f0ede6;border-radius:6px;margin-bottom:6px;font-size:13px}
 .attach-file a{color:#185FA5;text-decoration:none;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.attach-file a:hover{text-decoration:underline}
 .attach-file .meta{font-size:11px;color:#888780;white-space:nowrap}
 .empty{text-align:center;padding:3rem;color:#888780;font-size:14px}
 @keyframes blink{0%,80%,100%{opacity:.2}40%{opacity:1}}
@@ -155,33 +147,43 @@ ul.pts li::before{content:"·";position:absolute;left:0;color:#b4b2a9}
     <button class="btn btn-sm" onclick="location.href=location.pathname">← 뷰어로 돌아가기</button>
   </div>
 
+  <!-- 토큰 관리 카드 -->
   <div class="card">
-    <div class="stitle">GitHub 설정</div>
-    <div class="info-box">
-      토큰은 이 페이지 안에서만 사용돼요. 페이지를 벗어나면 사라지며 저장되지 않아요.<br>
-      파일은 저장소 <code>files/{회의ID}/</code> 경로에 자동 업로드됩니다.
+    <div class="stitle">GitHub 토큰</div>
+    <div class="warn-box">
+      토큰은 이 브라우저의 <strong>localStorage</strong>에 암호화 저장돼요.
+      다른 사람이 이 기기를 사용한다면 <strong>삭제</strong>하세요.
+      토큰은 <code>ecologee.github.io</code> 도메인에서만 접근 가능해요.
     </div>
-    <div class="row">
+    <div id="tokenSavedArea" style="margin-bottom:12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+      <span id="tokenBadge" class="token-saved-badge none">저장된 토큰 없음</span>
+      <button class="btn btn-sm btn-danger" id="tokenDeleteBtn" onclick="deleteToken()" style="display:none">토큰 삭제</button>
+    </div>
+    <div class="row" id="tokenInputRow">
       <div class="flex1">
-        <input type="password" id="ghToken" placeholder="GitHub Token (ghp_로 시작)">
+        <input type="password" id="ghToken" placeholder="새 토큰 입력 (ghp_로 시작)">
+        <div class="hint">입력 후 저장하면 다음 방문부터 자동으로 불러와요</div>
       </div>
-      <button class="btn" onclick="testToken()">연결 테스트</button>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <button class="btn btn-primary" onclick="saveToken()">저장</button>
+        <button class="btn" onclick="testToken()">테스트</button>
+      </div>
     </div>
-    <div class="status-row" id="tokenStatus" style="display:none">
+    <div class="status-row" id="tokenStatus" style="display:none;margin-top:10px">
       <div class="dot" id="tokenDot"></div><span id="tokenMsg"></span>
     </div>
   </div>
 
+  <!-- 편집 목록 -->
   <div class="card">
     <div class="stitle">회의록별 편집</div>
-    <div class="meeting-edit-list" id="editList"><div style="font-size:13px;color:#888780">회의록 불러오는 중...</div></div>
+    <div class="meeting-edit-list" id="editList">
+      <div style="font-size:13px;color:#888780">회의록 불러오는 중...</div>
+    </div>
   </div>
 
   <div class="sync-bar">
-    <div class="flex1">변경사항을 저장하면 GitHub에 즉시 반영됩니다</div>
-    <div class="status-row" id="globalStatus" style="display:none;margin-top:0">
-      <div class="dot" id="globalDot"></div><span id="globalMsg"></span>
-    </div>
+    <div class="flex1" style="font-size:13px;color:#5f5e5a">각 회의록의 "저장 및 동기화" 버튼을 누르면 GitHub에 즉시 반영돼요</div>
   </div>
 </div>
 
@@ -189,7 +191,7 @@ ul.pts li::before{content:"·";position:absolute;left:0;color:#b4b2a9}
 <div id="hubWrap">
   <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:4px;flex-wrap:wrap;gap:8px">
     <div class="hub-title">회의록 허브</div>
-    <a id="adminLink" href="?admin" style="font-size:12px;color:#888780;text-decoration:none;display:none">⚙ 관리</a>
+    <a href="?admin" style="font-size:12px;color:#b4b2a9;text-decoration:none">⚙ 관리</a>
   </div>
   <div class="hub-sub">라이브 데이터 AX팀 회의록</div>
   <div class="search-bar">
@@ -206,20 +208,83 @@ ul.pts li::before{content:"·";position:absolute;left:0;color:#b4b2a9}
   </div>
 </div>
 
-</div><!-- .page -->
+</div>
 <script>
 var OWNER='ecologee', REPO='meetRecord';
+var TOKEN_KEY='mhub_tk';
+var XOR_KEY='LiveDataAXTeam2026';
 var meetings=[], expanded={}, activeTabs={}, activeAgenda={};
-var editState={}; // {id: {memo, links:[{title,url}], files:[{name,url,size}]}}
+var editState={};
 var isAdmin=location.search.includes('admin');
+
+/* ══ XOR 암호화 ══ */
+function xorEncode(str, key){
+  var out='';
+  for(var i=0;i<str.length;i++){
+    out+=String.fromCharCode(str.charCodeAt(i)^key.charCodeAt(i%key.length));
+  }
+  return btoa(out);
+}
+function xorDecode(encoded, key){
+  try{
+    var str=atob(encoded);
+    var out='';
+    for(var i=0;i<str.length;i++){
+      out+=String.fromCharCode(str.charCodeAt(i)^key.charCodeAt(i%key.length));
+    }
+    return out;
+  }catch(e){return '';}
+}
+
+/* ══ 토큰 저장/불러오기 ══ */
+function saveToken(){
+  var t=document.getElementById('ghToken').value.trim();
+  if(!t){showTokenStatus('err','토큰을 입력해주세요');return;}
+  if(!t.startsWith('ghp_')&&!t.startsWith('github_pat_')){
+    showTokenStatus('err','올바른 GitHub 토큰 형식이 아니에요 (ghp_ 로 시작해야 해요)');return;
+  }
+  localStorage.setItem(TOKEN_KEY, xorEncode(t, XOR_KEY));
+  document.getElementById('ghToken').value='';
+  updateTokenBadge(true);
+  showTokenStatus('ok','토큰이 암호화되어 저장됐어요. 다음 방문부터 자동으로 불러와요 ✓');
+}
+function loadToken(){
+  var enc=localStorage.getItem(TOKEN_KEY);
+  if(!enc) return '';
+  return xorDecode(enc, XOR_KEY);
+}
+function deleteToken(){
+  if(!confirm('저장된 토큰을 삭제할까요?')) return;
+  localStorage.removeItem(TOKEN_KEY);
+  updateTokenBadge(false);
+  showTokenStatus('ok','토큰이 삭제됐어요');
+}
+function getToken(){
+  // 입력칸에 값이 있으면 우선 사용, 없으면 저장된 토큰 사용
+  var inputVal=document.getElementById('ghToken')?document.getElementById('ghToken').value.trim():'';
+  return inputVal || loadToken();
+}
+function updateTokenBadge(hasSaved){
+  var badge=document.getElementById('tokenBadge');
+  var delBtn=document.getElementById('tokenDeleteBtn');
+  if(hasSaved){
+    badge.className='token-saved-badge';
+    badge.innerHTML='🔐 토큰 저장됨 (자동 로그인)';
+    delBtn.style.display='';
+  } else {
+    badge.className='token-saved-badge none';
+    badge.innerHTML='저장된 토큰 없음';
+    delBtn.style.display='none';
+  }
+}
 
 /* ══ 초기화 ══ */
 async function init(){
   if(isAdmin){
     document.getElementById('adminWrap').classList.add('show');
     document.getElementById('hubWrap').style.display='none';
-  } else {
-    document.getElementById('adminLink').style.display='';
+    // 저장된 토큰 상태 표시
+    updateTokenBadge(!!localStorage.getItem(TOKEN_KEY));
   }
   try{
     var res=await fetch('./meetings.json?t='+Date.now());
@@ -229,62 +294,54 @@ async function init(){
     if(isAdmin){ buildEditList(); }
     else{ buildFilters(); render(); }
   }catch(e){
-    if(isAdmin){
-      document.getElementById('editList').innerHTML='<div style="color:#A32D2D;font-size:13px">불러오기 실패: '+e.message+'</div>';
-    } else {
-      document.getElementById('list').innerHTML='<div class="empty">회의록을 불러오지 못했습니다<br><small style="color:#b4b2a9">'+e.message+'</small></div>';
-    }
+    var msg='불러오기 실패: '+e.message;
+    if(isAdmin) document.getElementById('editList').innerHTML='<div style="color:#A32D2D;font-size:13px">'+msg+'</div>';
+    else document.getElementById('list').innerHTML='<div class="empty">'+msg+'</div>';
   }
 }
 
-/* ══ GitHub 유틸 ══ */
-function getToken(){ return document.getElementById('ghToken').value.trim(); }
-
+/* ══ GitHub API ══ */
 async function ghGet(path){
-  var r=await fetch('https://api.github.com/repos/'+OWNER+'/'+REPO+'/contents/'+path,{
+  return fetch('https://api.github.com/repos/'+OWNER+'/'+REPO+'/contents/'+path,{
     headers:{'Authorization':'Bearer '+getToken(),'Accept':'application/vnd.github.v3+json'}
   });
-  return r;
 }
-async function ghPut(path, content64, message, sha){
-  var body={message:message, content:content64};
+async function ghPut(path,content64,message,sha){
+  var body={message:message,content:content64};
   if(sha) body.sha=sha;
-  var r=await fetch('https://api.github.com/repos/'+OWNER+'/'+REPO+'/contents/'+path,{
+  return fetch('https://api.github.com/repos/'+OWNER+'/'+REPO+'/contents/'+path,{
     method:'PUT',
     headers:{'Authorization':'Bearer '+getToken(),'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},
     body:JSON.stringify(body)
   });
-  return r;
 }
 async function getSha(path){
   try{ var r=await ghGet(path); if(r.ok){var d=await r.json();return d.sha;} }catch(e){}
   return null;
 }
-
 async function testToken(){
+  if(!getToken()){showTokenStatus('err','토큰을 입력하거나 저장된 토큰이 있어야 해요');return;}
   showTokenStatus('spin','연결 확인 중...');
   try{
     var r=await fetch('https://api.github.com/repos/'+OWNER+'/'+REPO,{
       headers:{'Authorization':'Bearer '+getToken(),'Accept':'application/vnd.github.v3+json'}
     });
-    if(r.ok){ showTokenStatus('ok','연결 성공 ✓'); }
+    if(r.ok){ showTokenStatus('ok','연결 성공! 저장소 접근 확인됨 ✓'); }
     else{ var d=await r.json(); showTokenStatus('err','오류: '+(d.message||r.status)); }
   }catch(e){ showTokenStatus('err','네트워크 오류: '+e.message); }
 }
 
-/* ══ 관리자 — 편집 목록 ══ */
+/* ══ 편집 목록 빌드 ══ */
 function buildEditList(){
-  // init editState from existing data
   meetings.forEach(function(m){
     editState[m.id]={
-      memo: m.memo||'',
-      links: (m.links||[]).map(function(l){return {title:l.title,url:l.url}}),
-      files: (m.files||[]).map(function(f){return {name:f.name,url:f.url,size:f.size||''}})
+      memo:m.memo||'',
+      links:(m.links||[]).map(function(l){return {title:l.title||'',url:l.url||''}}),
+      files:(m.files||[]).map(function(f){return {name:f.name,url:f.url,size:f.size||''}})
     };
   });
   var el=document.getElementById('editList');
   el.innerHTML=meetings.map(function(m){
-    var d=new Date(m.date);
     var ds=m.date.slice(5).replace('-','/')+'('+m.dow+')';
     return '<div class="edit-card" id="ec_'+m.id+'">'
       +'<div class="edit-card-head" onclick="toggleEdit(\''+m.id+'\')">'
@@ -292,24 +349,21 @@ function buildEditList(){
       +'<div class="edit-title">'+m.title+'</div>'
       +'<div class="edit-chevron">⌄</div>'
       +'</div>'
-      +'<div class="edit-body" id="eb_'+m.id+'">'
-        +renderEditBody(m)
-      +'</div>'
+      +'<div class="edit-body" id="eb_'+m.id+'">'+renderEditBody(m)+'</div>'
       +'</div>';
   }).join('');
 }
-
 function renderEditBody(m){
-  var s=editState[m.id]||{memo:'',links:[],files:[]};
-  var linksHtml=s.links.map(function(l,i){
-    return '<div class="link-item" id="li_'+m.id+'_'+i+'">'
-      +'<input type="text" placeholder="링크 제목" value="'+esc(l.title)+'" oninput="updateLink(\''+m.id+'\','+i+',\'title\',this.value)" style="max-width:180px">'
-      +'<input type="url" placeholder="https://" value="'+esc(l.url)+'" oninput="updateLink(\''+m.id+'\','+i+',\'url\',this.value)">'
+  var s=editState[m.id];
+  var linksH=s.links.map(function(l,i){
+    return '<div class="link-item">'
+      +'<input type="text" placeholder="링크 제목" value="'+esc(l.title)+'" oninput="editState[\''+m.id+'\'].links['+i+'].title=this.value" style="max-width:180px">'
+      +'<input type="url" placeholder="https://" value="'+esc(l.url)+'" oninput="editState[\''+m.id+'\'].links['+i+'].url=this.value">'
       +'<button class="btn btn-sm btn-danger" onclick="removeLink(\''+m.id+'\','+i+')">✕</button>'
       +'</div>';
   }).join('');
-  var filesHtml=s.files.map(function(f,i){
-    return '<div class="file-item">'
+  var filesH=s.files.map(function(f,i){
+    return '<div class="file-list-item">'
       +'<a href="'+f.url+'" target="_blank">📎 '+esc(f.name)+'</a>'
       +'<span class="file-size">'+f.size+'</span>'
       +'<button class="btn btn-sm btn-danger" onclick="removeFile(\''+m.id+'\','+i+')">✕</button>'
@@ -317,112 +371,88 @@ function renderEditBody(m){
   }).join('');
   return '<div class="edit-section">'
     +'<div class="edit-label">📝 추가 메모</div>'
-    +'<textarea rows="4" placeholder="자유롭게 메모를 작성하세요. 회의록 메모 탭에 표시됩니다." oninput="editState[\''+m.id+'\'].memo=this.value">'+esc(s.memo)+'</textarea>'
+    +'<textarea rows="4" placeholder="자유롭게 메모를 작성하세요." oninput="editState[\''+m.id+'\'].memo=this.value">'+esc(s.memo)+'</textarea>'
     +'</div>'
     +'<div class="edit-section">'
     +'<div class="edit-label">🔗 외부 링크</div>'
-    +'<div id="links_'+m.id+'">'+linksHtml+'</div>'
+    +'<div id="links_'+m.id+'">'+linksH+'</div>'
     +'<button class="btn btn-sm" onclick="addLink(\''+m.id+'\')">+ 링크 추가</button>'
     +'</div>'
     +'<div class="edit-section">'
     +'<div class="edit-label">📁 파일 첨부</div>'
-    +'<div id="files_'+m.id+'">'+filesHtml+'</div>'
+    +'<div id="files_'+m.id+'">'+filesH+'</div>'
     +'<div class="upload-zone" id="uz_'+m.id+'" onclick="document.getElementById(\'fi_'+m.id+'\').click()" ondragover="dragOver(event,\''+m.id+'\')" ondragleave="dragLeave(\''+m.id+'\')" ondrop="dropFile(event,\''+m.id+'\')">'
-    +'파일을 드래그하거나 클릭해서 업로드<br><span style="font-size:11px">GitHub에 자동 저장됩니다</span>'
+    +'파일을 드래그하거나 클릭해서 업로드<br><span style="font-size:11px">GitHub files/ 폴더에 자동 저장</span>'
     +'<input type="file" id="fi_'+m.id+'" multiple style="display:none" onchange="uploadFiles(\''+m.id+'\',this.files)">'
     +'</div>'
     +'<div class="upload-progress" id="up_'+m.id+'"></div>'
     +'</div>'
     +'<div class="divider"></div>'
-    +'<button class="btn btn-primary" onclick="saveMeeting(\''+m.id+'\')">이 회의록 저장 및 동기화</button>'
-    +'<div class="status-row" id="ms_'+m.id+'" style="display:none;margin-top:8px">'
+    +'<div class="row">'
+    +'<button class="btn btn-primary" onclick="saveMeeting(\''+m.id+'\')">저장 및 GitHub 동기화</button>'
+    +'</div>'
+    +'<div class="status-row" id="ms_'+m.id+'" style="display:none;margin-top:10px">'
     +'<div class="dot" id="md_'+m.id+'"></div><span id="mm_'+m.id+'"></span>'
     +'</div>';
 }
-
 function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function toggleEdit(id){document.getElementById('ec_'+id).classList.toggle('open');}
 
-function toggleEdit(id){
-  var card=document.getElementById('ec_'+id);
-  card.classList.toggle('open');
-}
-
-/* ── 링크 관리 ── */
+/* ── 링크 ── */
 function addLink(id){
   editState[id].links.push({title:'',url:''});
   refreshLinks(id);
 }
-function removeLink(id,i){
-  editState[id].links.splice(i,1);
-  refreshLinks(id);
-}
-function updateLink(id,i,field,val){
-  editState[id].links[i][field]=val;
-}
+function removeLink(id,i){editState[id].links.splice(i,1);refreshLinks(id);}
 function refreshLinks(id){
-  var m=meetings.find(function(x){return x.id===id;});
-  var s=editState[id];
-  document.getElementById('links_'+id).innerHTML=s.links.map(function(l,i){
+  document.getElementById('links_'+id).innerHTML=editState[id].links.map(function(l,i){
     return '<div class="link-item">'
-      +'<input type="text" placeholder="링크 제목" value="'+esc(l.title)+'" oninput="updateLink(\''+id+'\','+i+',\'title\',this.value)" style="max-width:180px">'
-      +'<input type="url" placeholder="https://" value="'+esc(l.url)+'" oninput="updateLink(\''+id+'\','+i+',\'url\',this.value)">'
+      +'<input type="text" placeholder="링크 제목" value="'+esc(l.title)+'" oninput="editState[\''+id+'\'].links['+i+'].title=this.value" style="max-width:180px">'
+      +'<input type="url" placeholder="https://" value="'+esc(l.url)+'" oninput="editState[\''+id+'\'].links['+i+'].url=this.value">'
       +'<button class="btn btn-sm btn-danger" onclick="removeLink(\''+id+'\','+i+')">✕</button>'
       +'</div>';
   }).join('');
 }
 
-/* ── 파일 업로드 ── */
+/* ── 파일 ── */
 function dragOver(e,id){e.preventDefault();document.getElementById('uz_'+id).classList.add('drag');}
 function dragLeave(id){document.getElementById('uz_'+id).classList.remove('drag');}
 function dropFile(e,id){e.preventDefault();dragLeave(id);uploadFiles(id,e.dataTransfer.files);}
-
 async function uploadFiles(id,fileList){
-  if(!getToken()){showMeetingStatus(id,'err','토큰을 먼저 입력해주세요');return;}
+  if(!getToken()){showMeetStatus(id,'err','토큰이 없어요. 저장하거나 입력해주세요');return;}
   var prog=document.getElementById('up_'+id);
   prog.style.display='block';
   for(var i=0;i<fileList.length;i++){
     var file=fileList[i];
-    prog.textContent='업로드 중: '+file.name+' ('+Math.round(file.size/1024)+'KB)...';
+    prog.textContent='업로드 중: '+file.name+' ('+formatSize(file.size)+')...';
     try{
-      var b64=await readFileAsBase64(file);
+      var b64=await readBase64(file);
       var path='files/'+id+'/'+file.name;
       var sha=await getSha(path);
-      var r=await ghPut(path, b64, '파일 업로드: '+file.name, sha);
+      var r=await ghPut(path,b64,'파일 업로드: '+file.name,sha);
       if(r.ok){
-        var rawUrl='https://raw.githubusercontent.com/'+OWNER+'/'+REPO+'/main/'+path;
-        editState[id].files.push({name:file.name,url:rawUrl,size:formatSize(file.size)});
+        var url='https://raw.githubusercontent.com/'+OWNER+'/'+REPO+'/main/'+path;
+        editState[id].files.push({name:file.name,url:url,size:formatSize(file.size)});
         refreshFiles(id);
         prog.textContent='✓ '+file.name+' 업로드 완료';
-      }else{
-        var ed=await r.json();
-        prog.textContent='✗ 오류: '+(ed.message||r.status);
-      }
+      }else{var ed=await r.json();prog.textContent='✗ '+(ed.message||r.status);}
     }catch(e){prog.textContent='✗ '+e.message;}
   }
   setTimeout(function(){prog.style.display='none';},3000);
 }
-
-function readFileAsBase64(file){
-  return new Promise(function(resolve,reject){
+function readBase64(file){
+  return new Promise(function(res,rej){
     var fr=new FileReader();
-    fr.onload=function(){resolve(fr.result.split(',')[1]);};
-    fr.onerror=reject;
+    fr.onload=function(){res(fr.result.split(',')[1]);};
+    fr.onerror=rej;
     fr.readAsDataURL(file);
   });
 }
-function formatSize(bytes){
-  if(bytes<1024) return bytes+'B';
-  if(bytes<1024*1024) return Math.round(bytes/1024)+'KB';
-  return (bytes/1024/1024).toFixed(1)+'MB';
-}
-function removeFile(id,i){
-  editState[id].files.splice(i,1);
-  refreshFiles(id);
-}
+function formatSize(b){if(b<1024)return b+'B';if(b<1048576)return Math.round(b/1024)+'KB';return (b/1048576).toFixed(1)+'MB';}
+function removeFile(id,i){editState[id].files.splice(i,1);refreshFiles(id);}
 function refreshFiles(id){
-  var s=editState[id];
-  document.getElementById('files_'+id).innerHTML=s.files.map(function(f,i){
-    return '<div class="file-item">'
+  document.getElementById('files_'+id).innerHTML=editState[id].files.map(function(f,i){
+    return '<div class="file-list-item">'
       +'<a href="'+f.url+'" target="_blank">📎 '+esc(f.name)+'</a>'
       +'<span class="file-size">'+f.size+'</span>'
       +'<button class="btn btn-sm btn-danger" onclick="removeFile(\''+id+'\','+i+')">✕</button>'
@@ -430,13 +460,13 @@ function refreshFiles(id){
   }).join('');
 }
 
-/* ── 회의록 저장 ── */
+/* ── 저장 ── */
 async function saveMeeting(id){
-  if(!getToken()){showMeetingStatus(id,'err','토큰을 먼저 입력해주세요');return;}
-  showMeetingStatus(id,'spin','저장 중...');
+  if(!getToken()){showMeetStatus(id,'err','토큰이 없어요. 위에서 저장하거나 입력해주세요');return;}
+  showMeetStatus(id,'spin','GitHub에 저장 중...');
   var s=editState[id];
   var idx=meetings.findIndex(function(m){return m.id===id;});
-  if(idx<0){showMeetingStatus(id,'err','회의록을 찾을 수 없어요');return;}
+  if(idx<0){showMeetStatus(id,'err','회의록을 찾을 수 없어요');return;}
   meetings[idx].memo=s.memo;
   meetings[idx].links=s.links.filter(function(l){return l.url;});
   meetings[idx].files=s.files;
@@ -444,17 +474,17 @@ async function saveMeeting(id){
   var content=btoa(unescape(encodeURIComponent(JSON.stringify(sorted,null,2))));
   var sha=await getSha('meetings.json');
   var r=await ghPut('meetings.json',content,'회의록 업데이트: '+meetings[idx].title,sha);
-  if(r.ok){ showMeetingStatus(id,'ok','저장 완료! 페이지 새로고침 시 반영돼요 ✓'); }
-  else{ var ed=await r.json(); showMeetingStatus(id,'err','저장 실패: '+(ed.message||r.status)); }
+  if(r.ok){showMeetStatus(id,'ok','저장 완료! ✓');}
+  else{var ed=await r.json();showMeetStatus(id,'err','실패: '+(ed.message||r.status));}
 }
 
-/* ── 상태 표시 ── */
+/* ── 상태 ── */
 function showTokenStatus(t,m){
   var el=document.getElementById('tokenStatus');el.style.display='flex';
   document.getElementById('tokenDot').className='dot '+t;
   document.getElementById('tokenMsg').textContent=m;
 }
-function showMeetingStatus(id,t,m){
+function showMeetStatus(id,t,m){
   var el=document.getElementById('ms_'+id);el.style.display='flex';
   document.getElementById('md_'+id).className='dot '+t;
   document.getElementById('mm_'+id).textContent=m;
@@ -476,7 +506,6 @@ function buildFilters(){
     var o=document.createElement('option');o.value=t;o.textContent=t;ts.appendChild(o);
   });
 }
-
 function render(){
   var q=(document.getElementById('searchQ').value||'').toLowerCase();
   var month=document.getElementById('filterMonth').value;
@@ -504,45 +533,33 @@ function render(){
     var isExp=!!expanded[m.id];
     var atab=activeTabs[m.id]||'agenda';
     var aidx=activeAgenda[m.id]||0;
+    var hasMemo=m.memo&&m.memo.trim();
+    var hasAttach=(m.links&&m.links.length)||(m.files&&m.files.length);
     var topicHtml=(m.topics||[]).map(function(t){
       var hit=q&&t.toLowerCase().includes(q);
       return '<span class="topic-tag'+(hit?' hit':'')+'">'+(t.length>8?t.slice(0,8)+'…':t)+'</span>';
     }).join('');
-
-    // extra tab indicators
-    var hasMemo=m.memo&&m.memo.trim();
-    var hasAttach=(m.links&&m.links.length)||(m.files&&m.files.length);
-
     var det='';
     if(isExp){
       var tabs=['agenda','actions','risks'];
       var lbs=['안건별 상세','액션 아이템','이슈·기회'];
-      if(hasMemo) tabs.push('memo'), lbs.push('메모'+(hasMemo?'':''));
-      if(hasAttach) tabs.push('attach'), lbs.push('첨부'+(hasAttach?' ('+(((m.links||[]).length)+((m.files||[]).length))+')':''));
-
-      var tbH=tabs.map(function(t,i){
-        return '<button class="dtab'+(atab===t?' active':'')+'" onclick="setTab(event,\''+m.id+'\',\''+t+'\')">'+lbs[i]+'</button>';
-      }).join('');
-
+      if(hasMemo){tabs.push('memo');lbs.push('메모');}
+      if(hasAttach){tabs.push('attach');lbs.push('첨부 ('+(((m.links||[]).length)+((m.files||[]).length))+')');}
+      var tbH=tabs.map(function(t,i){return '<button class="dtab'+(atab===t?' active':'')+'" onclick="setTab(event,\''+m.id+'\',\''+t+'\')">'+lbs[i]+'</button>'}).join('');
       var ags=m.agendas||[];
       var agN=ags.map(function(ag,i){var s=ag.title.split('—')[0].split('·')[0].trim();if(s.length>14)s=s.slice(0,14)+'…';return '<div class="ag-chip'+(aidx===i?' active':'')+'" onclick="setAgenda(event,\''+m.id+'\','+i+')">'+s+'</div>'}).join('');
       var cur=ags[aidx]||{};
       var agD=cur.title?'<div class="ag-detail"><div class="ag-title">'+cur.title+'</div><ul class="pts">'+(cur.points||[]).map(function(p){return '<li>'+p+'</li>'}).join('')+'</ul></div>':'';
       var agC='<div class="dtab-content'+(atab==='agenda'?' visible':'')+'"><div class="agenda-nav">'+agN+'</div>'+agD+'</div>';
-
       var sl={s_urgent:'긴급',s_ongoing:'진행중',s_pending:'예정',s_risk:'리스크'};
       var aR=(m.actions||[]).map(function(a){var sk=a.status.replace('-','_');return '<div class="arow"><div>'+a.text+'</div><div>'+a.owner+'</div><div>'+a.due+'</div><div><span class="'+a.status+'">'+(sl[sk]||a.status)+'</span></div></div>'}).join('');
       var acC='<div class="dtab-content'+(atab==='actions'?' visible':'')+'"><div class="action-grid"><div class="action-head">항목</div><div class="action-head">담당</div><div class="action-head">기한</div><div class="action-head">상태</div>'+aR+'</div></div>';
-
       var riC='<div class="dtab-content'+(atab==='risks'?' visible':'')+'"><div class="sec-label">리스크</div>'+(m.risks||[]).map(function(r){return '<div class="risk-item">'+r+'</div>'}).join('')+'<div class="sec-label">기회</div>'+(m.opportunities||[]).map(function(o){return '<div class="opp-item">'+o+'</div>'}).join('')+'</div>';
-
-      var memoC='<div class="dtab-content'+(atab==='memo'?' visible':'')+'"><div class="memo-box">'+(m.memo||'(메모 없음)')+'</div></div>';
-
-      var linksH=(m.links||[]).map(function(l){return '<a class="attach-link" href="'+l.url+'" target="_blank"><span class="icon">🔗</span><span class="label">'+esc(l.title||l.url)+'</span><span class="meta">↗</span></a>'}).join('');
+      var memoC='<div class="dtab-content'+(atab==='memo'?' visible':'')+'"><div class="memo-box">'+(m.memo||'메모 없음')+'</div></div>';
+      var linksH=(m.links||[]).map(function(l){return '<a class="attach-link" href="'+l.url+'" target="_blank"><span>🔗</span><span class="lbl">'+esc(l.title||l.url)+'</span><span style="font-size:11px;color:#888780">↗</span></a>'}).join('');
       var filesH=(m.files||[]).map(function(f){return '<div class="attach-file"><a href="'+f.url+'" target="_blank">📎 '+esc(f.name)+'</a><span class="meta">'+f.size+'</span></div>'}).join('');
-      var attachC='<div class="dtab-content'+(atab==='attach'?' visible':'')+'">'+((m.links||[]).length?'<div class="sec-label">링크</div>'+linksH:'')+((m.files||[]).length?'<div class="sec-label">파일</div>'+filesH:'')+(!(m.links||[]).length&&!(m.files||[]).length?'<div style="color:#888780;font-size:13px">첨부 없음</div>':'')+'</div>';
-
-      det='<div class="m-detail"><div class="detail-tabs">'+tbH+'</div>'+agC+acC+riC+memoC+attachC+'</div>';
+      var attC='<div class="dtab-content'+(atab==='attach'?' visible':'')+'">'+((m.links||[]).length?'<div class="sec-label">링크</div>'+linksH:'')+((m.files||[]).length?'<div class="sec-label">파일</div>'+filesH:'')+(!(m.links||[]).length&&!(m.files||[]).length?'<div style="color:#888780;font-size:13px">첨부 없음</div>':'')+'</div>';
+      det='<div class="m-detail"><div class="detail-tabs">'+tbH+'</div>'+agC+acC+riC+memoC+attC+'</div>';
     }
     return '<div class="m-card'+(isExp?' expanded':'')+'" id="mc_'+m.id+'"><div class="m-head" onclick="toggle(\''+m.id+'\')"><div class="m-date-block"><div class="m-month">'+mon+'</div><div class="m-day">'+day+'</div><div class="m-dow">'+m.dow+'</div></div><div class="m-info"><div class="m-title">'+m.title+(hasMemo?' <span style="font-size:10px;color:#888780">📝</span>':'')+(hasAttach?' <span style="font-size:10px;color:#888780">📎</span>':'')+'</div><div class="m-meta"><span class="badge b-gray">'+m.duration+'</span><span class="badge b-blue">'+m.attendees+'</span><span class="badge b-teal">'+m.type+'</span></div><div class="m-topics">'+topicHtml+'</div></div><div class="m-chevron">⌄</div></div>'+det+'</div>';
   }).join('');
@@ -550,7 +567,6 @@ function render(){
 function toggle(id){expanded[id]=!expanded[id];render();}
 function setTab(e,id,tab){e.stopPropagation();activeTabs[id]=tab;render();}
 function setAgenda(e,id,idx){e.stopPropagation();activeAgenda[id]=idx;render();}
-
 init();
 </script>
 </body>
