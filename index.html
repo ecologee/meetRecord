@@ -71,10 +71,67 @@ ul.pts li::before{content:"·";position:absolute;left:0;color:#b4b2a9}
 .dot{display:inline-block;animation:blink 1.2s ease-in-out infinite}
 .dot:nth-child(2){animation-delay:.2s}
 .dot:nth-child(3){animation-delay:.4s}
-.error-box{background:#FCEBEB;border:0.5px solid #F7C1C1;border-radius:8px;padding:1rem;color:#501313;font-size:13px;text-align:center}
+
+/* 관리자 패널 */
+#adminPanel{display:none;max-width:860px;margin:0 auto 2rem;background:#fff;border:0.5px solid #d3d1c7;border-radius:12px;padding:1.5rem}
+#adminPanel.show{display:block}
+.admin-title{font-size:16px;font-weight:500;margin-bottom:4px}
+.admin-sub{font-size:13px;color:#5f5e5a;margin-bottom:1.25rem}
+.admin-field{margin-bottom:12px}
+.admin-label{font-size:12px;color:#5f5e5a;margin-bottom:4px;font-weight:500}
+.admin-input{font-size:13px;padding:7px 10px;border:0.5px solid #d3d1c7;border-radius:8px;background:#f0ede6;color:#1a1a1a;outline:none;width:100%}
+.admin-input:focus{border-color:#b4b2a9;background:#fff}
+.admin-textarea{font-size:12px;padding:10px;border:0.5px solid #d3d1c7;border-radius:8px;background:#f0ede6;color:#1a1a1a;outline:none;width:100%;height:160px;resize:vertical;font-family:monospace}
+.admin-textarea:focus{border-color:#b4b2a9;background:#fff}
+.admin-hint{font-size:11px;color:#888780;margin-top:3px;line-height:1.5}
+.admin-btns{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;align-items:center}
+.abtn{font-size:13px;padding:7px 16px;border-radius:8px;border:0.5px solid #d3d1c7;background:#fff;color:#1a1a1a;cursor:pointer}
+.abtn:hover{background:#f0ede6}
+.abtn:disabled{opacity:.4;cursor:not-allowed}
+.abtn-primary{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
+.abtn-primary:hover{background:#333}
+.admin-status{font-size:12px;display:flex;align-items:center;gap:6px}
+.adot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.adot.ok{background:#639922}
+.adot.err{background:#E24B4A}
+.adot.spin{background:#378ADD;animation:sp 1s ease-in-out infinite}
+@keyframes sp{0%,100%{opacity:.3}50%{opacity:1}}
+.admin-info{background:#E6F1FB;border:0.5px solid #B5D4F4;border-radius:8px;padding:.75rem 1rem;font-size:12px;color:#0C447C;line-height:1.7;margin-bottom:14px}
+.admin-info code{background:#d4e8f7;padding:1px 5px;border-radius:4px;font-size:11px}
 </style>
 </head>
 <body>
+
+<!-- 관리자 패널 (URL에 ?admin 붙이면 표시) -->
+<div id="adminPanel">
+  <div class="admin-title">관리자 — 회의록 동기화</div>
+  <div class="admin-sub">새 회의록을 Claude에서 받아서 여기에 붙여넣고 동기화하세요</div>
+  <div class="admin-info">
+    <strong>사용 방법:</strong><br>
+    1. Claude에 회의 파일 업로드 → Claude가 새 <code>meetings.json</code> 내용 출력<br>
+    2. 출력된 JSON을 아래 칸에 붙여넣기<br>
+    3. GitHub Token 입력 후 <strong>동기화</strong> 클릭 → 자동으로 GitHub에 반영
+  </div>
+  <div class="admin-field">
+    <div class="admin-label">GitHub Token</div>
+    <input class="admin-input" id="adminToken" type="password" placeholder="ghp_로 시작하는 토큰 (이 브라우저에서만 사용, 저장 안 됨)">
+    <div class="admin-hint">토큰은 이 페이지를 벗어나면 사라져요. repo 권한 필요</div>
+  </div>
+  <div class="admin-field">
+    <div class="admin-label">새 meetings.json 내용 (Claude에서 복사)</div>
+    <textarea class="admin-textarea" id="adminJson" placeholder='Claude가 출력한 JSON을 여기에 붙여넣으세요&#10;[&#10;  { "id": "...", "date": "...", ... }&#10;]'></textarea>
+  </div>
+  <div class="admin-btns">
+    <button class="abtn abtn-primary" onclick="adminSync()">GitHub에 동기화 ↗</button>
+    <button class="abtn" onclick="validateJson()">JSON 검증</button>
+    <div class="admin-status" id="adminStatus" style="display:none">
+      <div class="adot" id="adminDot"></div>
+      <span id="adminMsg"></span>
+    </div>
+  </div>
+</div>
+
+<!-- 메인 허브 -->
 <div class="hub">
   <div class="hub-title">회의록 허브</div>
   <div class="hub-sub">라이브 데이터 AX팀 회의록</div>
@@ -85,14 +142,73 @@ ul.pts li::before{content:"·";position:absolute;left:0;color:#b4b2a9}
   </div>
   <div class="stats" id="stats"></div>
   <div id="list" class="meeting-list">
-    <div class="loading">
-      <span class="dot">●</span> <span class="dot">●</span> <span class="dot">●</span>
-      <div style="margin-top:8px;font-size:12px">회의록 불러오는 중...</div>
-    </div>
+    <div class="loading"><span class="dot">●</span> <span class="dot">●</span> <span class="dot">●</span><div style="margin-top:8px;font-size:12px">회의록 불러오는 중...</div></div>
   </div>
 </div>
+
 <script>
+/* ---------- 관리자 패널 ---------- */
+var OWNER='ecologee', REPO='meetRecord';
+
+if(location.search.includes('admin')){
+  document.getElementById('adminPanel').classList.add('show');
+}
+
+function validateJson(){
+  var txt=document.getElementById('adminJson').value.trim();
+  try{
+    var d=JSON.parse(txt);
+    if(!Array.isArray(d)){showAdmin('err','배열 형식이어야 해요 [ ... ]');return;}
+    showAdmin('ok','JSON 형식 정상 ✓ ('+d.length+'개 회의록)');
+  }catch(e){showAdmin('err','JSON 오류: '+e.message);}
+}
+
+async function adminSync(){
+  var token=document.getElementById('adminToken').value.trim();
+  var txt=document.getElementById('adminJson').value.trim();
+  if(!token){showAdmin('err','GitHub Token을 입력해주세요');return;}
+  if(!txt){showAdmin('err','JSON 내용을 붙여넣어 주세요');return;}
+  var data;
+  try{data=JSON.parse(txt);}catch(e){showAdmin('err','JSON 파싱 오류: '+e.message);return;}
+  if(!Array.isArray(data)){showAdmin('err','배열 형식이어야 해요');return;}
+  data.sort(function(a,b){return b.date.localeCompare(a.date)});
+  document.querySelector('.abtn-primary').disabled=true;
+  showAdmin('spin','현재 파일 확인 중...');
+  try{
+    var sha=null;
+    var gr=await fetch('https://api.github.com/repos/'+OWNER+'/'+REPO+'/contents/meetings.json',{
+      headers:{'Authorization':'Bearer '+token,'Accept':'application/vnd.github.v3+json'}
+    });
+    if(gr.ok){var gd=await gr.json();sha=gd.sha;}
+    showAdmin('spin','GitHub에 업로드 중...');
+    var content=btoa(unescape(encodeURIComponent(JSON.stringify(data,null,2))));
+    var body={message:'회의록 업데이트 '+new Date().toLocaleDateString('ko-KR'),content:content};
+    if(sha)body.sha=sha;
+    var pr=await fetch('https://api.github.com/repos/'+OWNER+'/'+REPO+'/contents/meetings.json',{
+      method:'PUT',
+      headers:{'Authorization':'Bearer '+token,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},
+      body:JSON.stringify(body)
+    });
+    if(pr.ok){
+      showAdmin('ok','동기화 완료! 페이지를 새로고침하면 바로 반영돼요 ✓');
+      setTimeout(function(){location.href=location.pathname;},2000);
+    }else{
+      var ed=await pr.json();showAdmin('err','업로드 실패: '+(ed.message||pr.status));
+    }
+  }catch(e){showAdmin('err','오류: '+e.message);}
+  document.querySelector('.abtn-primary').disabled=false;
+}
+
+function showAdmin(t,m){
+  var el=document.getElementById('adminStatus');
+  el.style.display='flex';
+  document.getElementById('adminDot').className='adot '+(t==='ok'?'ok':t==='err'?'err':t==='spin'?'spin':'');
+  document.getElementById('adminMsg').textContent=m;
+}
+
+/* ---------- 메인 허브 ---------- */
 var meetings=[],expanded={},activeTabs={},activeAgenda={};
+
 async function init(){
   try{
     var res=await fetch('./meetings.json?t='+Date.now());
@@ -101,9 +217,10 @@ async function init(){
     meetings.sort(function(a,b){return b.date.localeCompare(a.date)});
     buildFilters();render();
   }catch(e){
-    document.getElementById('list').innerHTML='<div class="error-box">회의록을 불러오지 못했습니다.<br><small>'+e.message+'</small></div>';
+    document.getElementById('list').innerHTML='<div class="empty">회의록을 불러오지 못했습니다<br><small style="color:#b4b2a9">'+e.message+'</small></div>';
   }
 }
+
 function buildFilters(){
   var months={},topics={};
   meetings.forEach(function(m){
@@ -119,6 +236,7 @@ function buildFilters(){
     var o=document.createElement('option');o.value=t;o.textContent=t;ts.appendChild(o);
   });
 }
+
 function render(){
   var q=(document.getElementById('searchQ').value||'').toLowerCase();
   var month=document.getElementById('filterMonth').value;
