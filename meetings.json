@@ -320,7 +320,12 @@
       "디유넷 단독 AI 파트너 — LXP 4강 중 AI 역량 파트너는 라이브 데이터 유일"
     ],
     "memo": "",
-    "links": [],
+    "links": [
+      {
+        "title": "LXP 조사",
+        "url": "https://gemini.google.com/share/fc4800e3ebaa"
+      }
+    ],
     "files": [
       {
         "name": "0317_황태훈님_대학교사업(디유넷 협력사업).txt",
