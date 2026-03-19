@@ -8,16 +8,14 @@
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#1a1a1a;background:#f5f4f0;padding:2rem 1rem}
 .page{max-width:860px;margin:0 auto}
-
-/* ── 공통 ── */
 .card{background:#fff;border:0.5px solid #d3d1c7;border-radius:12px;padding:1.25rem;margin-bottom:12px}
 .stitle{font-size:12px;font-weight:500;color:#5f5e5a;text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px}
 .badge{font-size:11px;padding:2px 8px;border-radius:8px;border:0.5px solid transparent}
 .b-blue{background:#E6F1FB;color:#0C447C;border-color:#B5D4F4}
 .b-teal{background:#E1F5EE;color:#085041;border-color:#9FE1CB}
 .b-gray{background:#f0ede6;color:#5f5e5a;border-color:#d3d1c7}
-.b-amber{background:#FAEEDA;color:#633806;border-color:#FAC775}
 .b-purple{background:#EEEDFE;color:#3C3489;border-color:#AFA9EC}
+.b-amber{background:#FAEEDA;color:#633806;border-color:#FAC775}
 .b-red{background:#FCEBEB;color:#A32D2D;border-color:#F7C1C1}
 .btn{font-size:13px;padding:7px 14px;border-radius:8px;border:0.5px solid #d3d1c7;background:#fff;color:#1a1a1a;cursor:pointer;transition:background .15s}
 .btn:hover{background:#f0ede6}
@@ -26,6 +24,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#1
 .btn-primary:hover{background:#333}
 .btn-sm{font-size:12px;padding:4px 10px}
 .btn-danger{color:#A32D2D;border-color:#F7C1C1;background:#FCEBEB}
+.btn-claude{background:#EEEDFE;color:#3C3489;border-color:#AFA9EC}
+.btn-claude:hover{background:#CECBF6}
 .btn-success{background:#EAF3DE;color:#3B6D11;border-color:#C0DD97}
 input[type=text],input[type=password],input[type=url],input[type=date],textarea,select{font-size:13px;padding:7px 10px;border:0.5px solid #d3d1c7;border-radius:8px;background:#f0ede6;color:#1a1a1a;outline:none;width:100%}
 input:focus,textarea:focus,select:focus{border-color:#b4b2a9;background:#fff}
@@ -40,25 +40,39 @@ textarea{resize:vertical;font-family:inherit}
 @keyframes sp{0%,100%{opacity:.3}50%{opacity:1}}
 .token-badge{font-size:11px;padding:2px 10px;border-radius:20px;background:#E1F5EE;color:#085041;border:0.5px solid #9FE1CB;display:inline-flex;align-items:center;gap:4px}
 .token-badge.none{background:#f0ede6;color:#888780;border-color:#d3d1c7}
-.fl{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .toast{position:fixed;bottom:1.5rem;right:1.5rem;background:#1a1a1a;color:#fff;font-size:13px;padding:8px 16px;border-radius:8px;opacity:0;transition:opacity .3s;pointer-events:none;z-index:999}
 .toast.show{opacity:1}
 
-/* ── 관리자 탭 ── */
-.admin-tabs{display:flex;border-bottom:0.5px solid #d3d1c7;margin-bottom:0}
-.atab{font-size:13px;padding:9px 16px;cursor:pointer;color:#5f5e5a;border-bottom:2px solid transparent;margin-bottom:-1px;background:none;border-top:none;border-left:none;border-right:none;white-space:nowrap}
+/* 관리자 탭 */
+.admin-tabs{display:flex;border-bottom:0.5px solid #d3d1c7}
+.atab{font-size:13px;padding:9px 14px;cursor:pointer;color:#5f5e5a;border-bottom:2px solid transparent;margin-bottom:-1px;background:none;border-top:none;border-left:none;border-right:none;white-space:nowrap}
 .atab.active{color:#1a1a1a;border-bottom-color:#1a1a1a;font-weight:500}
 .atab-pane{display:none;padding:1.25rem}
 .atab-pane.visible{display:block}
 
-/* ── 사전 회의 생성 ── */
-.topic-row{display:flex;gap:6px;align-items:flex-start;margin-bottom:8px}
-.topic-row .ti{flex:0 0 200px}
-.topic-row .tn{flex:1}
-.step-num{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:#1a1a1a;color:#fff;font-size:11px;font-weight:500;flex-shrink:0}
-.planned-banner{background:#EEEDFE;border:0.5px solid #AFA9EC;border-radius:8px;padding:.75rem 1rem;margin-bottom:12px;font-size:12px;color:#3C3489;line-height:1.6}
+/* Claude 채팅 패널 */
+.claude-panel{background:#EEEDFE;border:0.5px solid #AFA9EC;border-radius:10px;padding:1rem;margin-bottom:14px}
+.claude-panel-title{font-size:12px;font-weight:500;color:#3C3489;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.claude-chat-area{background:#fff;border:0.5px solid #AFA9EC;border-radius:8px;padding:.75rem;margin-bottom:8px;min-height:80px;max-height:300px;overflow-y:auto;font-size:13px;line-height:1.7;color:#1a1a1a;white-space:pre-wrap}
+.claude-chat-area.empty{color:#888780;font-style:italic}
+.claude-input-row{display:flex;gap:8px}
+.claude-input-row textarea{flex:1;min-height:52px;max-height:120px;background:#fff;border-color:#AFA9EC}
+.topic-apply-box{background:#fff;border:0.5px solid #AFA9EC;border-radius:8px;padding:.75rem;margin-top:8px;display:none}
+.topic-apply-title{font-size:12px;font-weight:500;color:#3C3489;margin-bottom:8px}
+.topic-chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;padding:4px 10px;border-radius:20px;background:#EEEDFE;color:#3C3489;border:0.5px solid #AFA9EC;margin:3px;cursor:pointer;transition:all .15s}
+.topic-chip:hover{background:#CECBF6}
+.topic-chip.selected{background:#534AB7;color:#fff;border-color:#534AB7}
+.typing-indicator{display:none;padding:6px 0;font-size:12px;color:#534AB7}
+.typing-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#534AB7;margin:0 2px;animation:td .8s ease-in-out infinite}
+.typing-dot:nth-child(2){animation-delay:.15s}.typing-dot:nth-child(3){animation-delay:.3s}
+@keyframes td{0%,80%,100%{opacity:.2;transform:scale(.8)}40%{opacity:1;transform:scale(1)}}
 
-/* ── 기존 편집 카드 ── */
+/* 주제 행 */
+.topic-row{display:flex;gap:6px;align-items:flex-start;margin-bottom:8px}
+.topic-row .ti{flex:0 0 190px}
+.topic-row .tn{flex:1}
+
+/* 편집 카드 */
 .edit-card{background:#fff;border:0.5px solid #d3d1c7;border-radius:10px;overflow:hidden;margin-bottom:8px}
 .edit-head{display:flex;align-items:center;gap:10px;padding:.75rem 1rem;cursor:pointer;background:#f5f4f0}
 .edit-head:hover{background:#eeebe4}
@@ -70,26 +84,22 @@ textarea{resize:vertical;font-family:inherit}
 .edit-card.open .edit-body{display:block}
 .esec{margin-bottom:1.25rem}
 .esec:last-child{margin-bottom:0}
-.elabel{font-size:12px;font-weight:500;color:#5f5e5a;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.elabel{font-size:12px;font-weight:500;color:#5f5e5a;margin-bottom:6px}
 .link-item{display:flex;gap:6px;align-items:center;margin-bottom:6px}
 .fitem{display:flex;align-items:center;gap:8px;padding:6px 10px;background:#f0ede6;border-radius:6px;margin-bottom:6px;font-size:12px}
 .fitem a{color:#185FA5;text-decoration:none;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.fsize{color:#888780;font-size:11px;white-space:nowrap}
+.fsize{color:#888780;font-size:11px}
 .upload-zone{border:1.5px dashed #d3d1c7;border-radius:8px;padding:1rem;text-align:center;cursor:pointer;font-size:13px;color:#888780;transition:all .15s}
 .upload-zone:hover,.upload-zone.drag{border-color:#378ADD;background:#E6F1FB;color:#0C447C}
 .uprog{font-size:12px;color:#185FA5;margin-top:6px;display:none}
-
-/* ── 논의 내용 편집 ── */
 .disc-row{background:#f0ede6;border-radius:8px;padding:.75rem;margin-bottom:8px}
 .disc-topic{font-size:12px;font-weight:500;color:#1a1a1a;margin-bottom:6px}
 .disc-row textarea{background:#fff}
-
-/* ── 팔로업 편집 ── */
 .fu-item{display:flex;gap:6px;align-items:center;margin-bottom:8px}
 .fu-item input[type=text]{flex:1}
 .fu-item input[type=date]{flex:0 0 130px}
 
-/* ── 허브 뷰어 ── */
+/* 허브 뷰어 */
 .hub-title{font-size:20px;font-weight:500;margin-bottom:4px}
 .hub-sub{font-size:13px;color:#5f5e5a;margin-bottom:1.25rem}
 .search-bar{display:flex;gap:8px;margin-bottom:.75rem;flex-wrap:wrap}
@@ -143,20 +153,14 @@ ul.pts li::before{content:"·";position:absolute;left:0;color:#b4b2a9}
 .opp-item{border-left:3px solid #639922;border-radius:0 6px 6px 0;background:#EAF3DE;padding:6px 10px;margin-bottom:6px;font-size:12px;color:#173404;line-height:1.5}
 .sec-lbl{font-size:11px;font-weight:500;color:#5f5e5a;text-transform:uppercase;letter-spacing:.05em;margin:1rem 0 6px}
 .memo-box{background:#FAEEDA;border-radius:8px;padding:1rem;font-size:13px;line-height:1.8;color:#412402;white-space:pre-wrap;word-break:break-word}
-
-/* ── 사전 주제 탭 ── */
 .pre-topic-card{background:#EEEDFE;border-radius:8px;padding:.75rem 1rem;margin-bottom:8px;border:0.5px solid #AFA9EC}
 .pre-topic-title{font-size:13px;font-weight:500;color:#3C3489;margin-bottom:4px}
 .pre-topic-notes{font-size:12px;color:#534AB7;line-height:1.6}
-
-/* ── 논의 내용 탭 ── */
 .disc-view-card{background:#f0ede6;border-radius:8px;padding:.75rem 1rem;margin-bottom:8px;border:0.5px solid #d3d1c7}
 .disc-view-topic{font-size:12px;font-weight:500;color:#5f5e5a;margin-bottom:6px;display:flex;align-items:center;gap:6px}
 .disc-view-topic .chip{font-size:10px;padding:1px 6px;border-radius:4px;background:#E6F1FB;color:#0C447C}
 .disc-view-content{font-size:13px;color:#1a1a1a;line-height:1.7;white-space:pre-wrap}
 .disc-outcome{margin-top:6px;font-size:12px;color:#3B6D11;background:#EAF3DE;padding:4px 8px;border-radius:4px;display:inline-block}
-
-/* ── 팔로업 탭 ── */
 .fu-list{display:flex;flex-direction:column;gap:8px}
 .fu-check-item{display:flex;align-items:flex-start;gap:10px;padding:.75rem 1rem;background:#f0ede6;border-radius:8px;transition:background .2s}
 .fu-check-item.done{background:#EAF3DE}
@@ -166,9 +170,6 @@ ul.pts li::before{content:"·";position:absolute;left:0;color:#b4b2a9}
 .fu-checkbox:checked::after{content:'✓';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#fff;font-size:11px;font-weight:700}
 .fu-text{font-size:13px;color:#1a1a1a;flex:1;line-height:1.5}
 .fu-due{font-size:11px;color:#888780;white-space:nowrap;margin-top:2px}
-.fu-saving{font-size:11px;color:#378ADD}
-
-/* 첨부 */
 .attach-link{display:flex;align-items:center;gap:8px;padding:8px 10px;background:#f0ede6;border-radius:6px;margin-bottom:6px;font-size:13px;text-decoration:none;color:#185FA5}
 .attach-link:hover{background:#e6e2d8}
 .attach-link .lbl{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -183,8 +184,6 @@ ul.pts li::before{content:"·";position:absolute;left:0;color:#b4b2a9}
 </head>
 <body>
 <div class="page">
-
-<!-- 토스트 -->
 <div class="toast" id="toast"></div>
 
 <!-- ══ 관리자 패널 ══ -->
@@ -194,25 +193,39 @@ ul.pts li::before{content:"·";position:absolute;left:0;color:#b4b2a9}
     <button class="btn btn-sm" onclick="location.href=location.pathname">← 뷰어로 돌아가기</button>
   </div>
 
-  <!-- 토큰 카드 -->
+  <!-- API 키 & 토큰 카드 -->
   <div class="card">
-    <div class="stitle">GitHub 토큰</div>
-    <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap">
-      <span id="tokenBadge" class="token-badge none">저장된 토큰 없음</span>
-      <button class="btn btn-sm btn-danger" id="tokenDelBtn" onclick="deleteToken()" style="display:none">삭제</button>
-    </div>
-    <div class="row">
-      <div class="flex1">
-        <input type="password" id="ghToken" placeholder="ghp_ 로 시작하는 토큰 입력 후 저장">
-        <div class="hint">localStorage에 XOR 암호화 저장 · 이 도메인에서만 접근 가능</div>
+    <div class="stitle">연결 설정</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:0">
+      <!-- GitHub 토큰 -->
+      <div>
+        <div style="font-size:12px;font-weight:500;color:#5f5e5a;margin-bottom:6px">GitHub 토큰</div>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap">
+          <span id="ghBadge" class="token-badge none">저장 안됨</span>
+          <button class="btn btn-sm btn-danger" id="ghDelBtn" onclick="deleteKey('gh')" style="display:none">삭제</button>
+        </div>
+        <input type="password" id="ghToken" placeholder="ghp_로 시작하는 토큰">
+        <div class="hint">repo 권한 필요</div>
+        <div style="display:flex;gap:6px;margin-top:8px">
+          <button class="btn btn-sm btn-primary" onclick="saveKey('gh')">저장</button>
+          <button class="btn btn-sm" onclick="testGH()">테스트</button>
+        </div>
+        <div class="sr" id="ghSt" style="display:none;margin-top:8px"><div class="dot" id="ghDot"></div><span id="ghMsg"></span></div>
       </div>
-      <div style="display:flex;flex-direction:column;gap:6px">
-        <button class="btn btn-primary" onclick="saveToken()">저장</button>
-        <button class="btn" onclick="testToken()">테스트</button>
+      <!-- Anthropic API 키 -->
+      <div>
+        <div style="font-size:12px;font-weight:500;color:#5f5e5a;margin-bottom:6px">Anthropic API 키 <span style="font-size:10px;color:#534AB7;background:#EEEDFE;padding:1px 6px;border-radius:4px">Claude 주제 정리</span></div>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap">
+          <span id="aiBadge" class="token-badge none">저장 안됨</span>
+          <button class="btn btn-sm btn-danger" id="aiDelBtn" onclick="deleteKey('ai')" style="display:none">삭제</button>
+        </div>
+        <input type="password" id="aiKey" placeholder="sk-ant-로 시작하는 API 키">
+        <div class="hint">사전 회의 주제 정리에 사용</div>
+        <div style="display:flex;gap:6px;margin-top:8px">
+          <button class="btn btn-sm btn-claude" onclick="saveKey('ai')">저장</button>
+        </div>
+        <div class="sr" id="aiSt" style="display:none;margin-top:8px"><div class="dot" id="aiDot"></div><span id="aiMsg"></span></div>
       </div>
-    </div>
-    <div class="sr" id="tokenSt" style="display:none;margin-top:10px">
-      <div class="dot" id="tokenDot"></div><span id="tokenMsg"></span>
     </div>
   </div>
 
@@ -224,12 +237,38 @@ ul.pts li::before{content:"·";position:absolute;left:0;color:#b4b2a9}
       <button class="atab" onclick="switchATab('edit')">✏️ 기존 편집</button>
     </div>
 
-    <!-- 탭 1: 사전 회의 생성 -->
+    <!-- 탭 1: 사전 회의 생성 (Claude 통합) -->
     <div class="atab-pane visible" id="atab-pre">
-      <div class="planned-banner">
-        회의 전에 논의할 주제를 미리 기록해두면 뷰어에 <strong>📋 예정</strong> 배지로 표시됩니다.<br>
-        회의 후에는 <strong>기존 편집</strong> 탭에서 논의 내용과 팔로업을 추가해 완성하세요.
+
+      <!-- Claude 채팅 패널 -->
+      <div class="claude-panel" id="claudePanel">
+        <div class="claude-panel-title">
+          ✦ Claude에게 주제 정리 요청
+          <span style="font-size:10px;color:#888780;margin-left:auto" id="aiKeyStatus"></span>
+        </div>
+        <div id="chatOutput" class="claude-chat-area empty">Claude에게 회의 맥락을 설명하면 논의 주제를 정리해드려요.<br><br>예) "디유넷 오혁수 본부장과 우석대 계약 관련 점심 미팅이 있어. 어떤 주제를 논의하면 좋을까?"</div>
+        <div class="typing-indicator" id="typingIndicator">
+          <span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span> Claude가 답변 중...
+        </div>
+        <div class="claude-input-row">
+          <textarea id="claudeInput" placeholder="회의 맥락을 설명하거나 논의 주제 정리를 요청하세요..." rows="2" onkeydown="if(event.key==='Enter'&&(event.metaKey||event.ctrlKey))askClaude()"></textarea>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <button class="btn btn-claude" onclick="askClaude()" id="askBtn">전송</button>
+            <button class="btn btn-sm" onclick="clearChat()">초기화</button>
+          </div>
+        </div>
+        <!-- 주제 적용 영역 -->
+        <div class="topic-apply-box" id="topicApplyBox">
+          <div class="topic-apply-title">아래 주제를 클릭하면 폼에 추가돼요</div>
+          <div id="topicChips"></div>
+          <div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap">
+            <button class="btn btn-sm btn-success" onclick="applySelectedTopics()">선택한 주제 폼에 추가</button>
+            <button class="btn btn-sm" onclick="applyAllTopics()">전체 추가</button>
+          </div>
+        </div>
       </div>
+
+      <!-- 회의 기본 정보 -->
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
         <div>
           <div class="elabel">날짜</div>
@@ -249,12 +288,12 @@ ul.pts li::before{content:"·";position:absolute;left:0;color:#b4b2a9}
       </div>
       <div style="margin-bottom:12px">
         <div class="elabel">참석자</div>
-        <input type="text" id="preAttendees" placeholder="예: 황태훈·이민형">
+        <input type="text" id="preAttendees" placeholder="예: 황태훈·오혁수(디유넷)">
       </div>
       <div style="margin-bottom:12px">
-        <div class="elabel">사전 논의 주제</div>
+        <div class="elabel">사전 논의 주제 <span style="font-size:11px;font-weight:400;color:#888780">— Claude 결과 또는 직접 입력</span></div>
         <div id="preTopicList"></div>
-        <button class="btn btn-sm" onclick="addPreTopic()">+ 주제 추가</button>
+        <button class="btn btn-sm" onclick="addPreTopic()">+ 주제 직접 추가</button>
       </div>
       <div class="row">
         <button class="btn btn-primary" onclick="createPreMeeting()">GitHub에 생성 ↗</button>
@@ -267,24 +306,20 @@ ul.pts li::before{content:"·";position:absolute;left:0;color:#b4b2a9}
     <!-- 탭 2: Claude JSON 추가 -->
     <div class="atab-pane" id="atab-add">
       <div style="background:#E1F5EE;border:0.5px solid #9FE1CB;border-radius:8px;padding:.75rem 1rem;font-size:12px;color:#085041;line-height:1.7;margin-bottom:14px">
-        <strong>사용 방법:</strong> 회의 파일을 Claude에 업로드 → Claude가 JSON 객체 1개 출력 → 아래 붙여넣고 추가
+        회의 파일을 Claude(claude.ai)에 업로드 → Claude가 JSON 객체 1개 출력 → 아래 붙여넣고 추가
       </div>
-      <div style="margin-bottom:10px">
-        <textarea id="newJson" rows="10" placeholder='{"id":"...","date":"...","title":"...",...}'></textarea>
-      </div>
-      <div class="row">
+      <textarea id="newJson" rows="10" placeholder='{"id":"...","date":"...","title":"...",...}'></textarea>
+      <div class="row" style="margin-top:10px">
         <button class="btn btn-primary" onclick="addMeeting()">GitHub에 추가 ↗</button>
         <button class="btn" onclick="validateJson()">JSON 검증</button>
       </div>
-      <div class="sr" id="addSt" style="display:none;margin-top:10px">
-        <div class="dot" id="addDot"></div><span id="addMsg"></span>
-      </div>
+      <div class="sr" id="addSt" style="display:none;margin-top:10px"><div class="dot" id="addDot"></div><span id="addMsg"></span></div>
     </div>
 
     <!-- 탭 3: 기존 편집 -->
     <div class="atab-pane" id="atab-edit">
-      <div class="hint" style="margin-bottom:12px">회의 후 논의 내용·팔로업을 추가하거나, 메모·링크·파일을 편집하세요.</div>
-      <div id="editList"><div style="font-size:13px;color:#888780">회의록 불러오는 중...</div></div>
+      <div class="hint" style="margin-bottom:12px">회의 후 논의 내용·팔로업 추가, 메모·링크·파일 편집</div>
+      <div id="editList"><div style="font-size:13px;color:#888780">불러오는 중...</div></div>
     </div>
   </div>
 </div>
@@ -309,7 +344,7 @@ ul.pts li::before{content:"·";position:absolute;left:0;color:#b4b2a9}
   <div class="stats" id="stats"></div>
   <div id="list" class="meeting-list">
     <div style="text-align:center;padding:3rem;color:#888780;font-size:14px">
-      <span class="blink">●</span> <span class="blink">●</span> <span class="blink">●</span>
+      <span class="blink">●</span><span class="blink">●</span><span class="blink">●</span>
       <div style="margin-top:8px;font-size:12px">불러오는 중...</div>
     </div>
   </div>
@@ -317,21 +352,52 @@ ul.pts li::before{content:"·";position:absolute;left:0;color:#b4b2a9}
 
 </div>
 <script>
-var OWNER='ecologee',REPO='meetRecord',TK_KEY='mhub_tk',XK='LiveDataAXTeam2026';
+var OWNER='ecologee',REPO='meetRecord';
+var GH_KEY='mhub_tk',AI_KEY='mhub_ak',XK='LiveDataAXTeam2026';
 var meetings=[],expanded={},activeTabs={},activeAgenda={};
 var editState={};
 var preTopics=[{topic:'',notes:''}];
+var chatHistory=[];
+var parsedTopics=[];
+var selectedTopics=new Set();
 var isAdmin=location.search.includes('admin');
 
 /* ══ 암호화 ══ */
-function enc(s,k){var o='';for(var i=0;i<s.length;i++)o+=String.fromCharCode(s.charCodeAt(i)^k.charCodeAt(i%k.length));return btoa(o);}
-function dec(e,k){try{var s=atob(e),o='';for(var i=0;i<s.length;i++)o+=String.fromCharCode(s.charCodeAt(i)^k.charCodeAt(i%k.length));return o;}catch(e){return '';}}
-function saveToken(){var t=document.getElementById('ghToken').value.trim();if(!t){showSt('tokenSt','tokenDot','tokenMsg','err','토큰 입력');return;}localStorage.setItem(TK_KEY,enc(t,XK));document.getElementById('ghToken').value='';updateBadge(true);showSt('tokenSt','tokenDot','tokenMsg','ok','저장됐어요 ✓');}
-function loadToken(){var e=localStorage.getItem(TK_KEY);return e?dec(e,XK):'';}
-function deleteToken(){if(!confirm('삭제?'))return;localStorage.removeItem(TK_KEY);updateBadge(false);}
-function getToken(){return(document.getElementById('ghToken')?document.getElementById('ghToken').value.trim():'')||loadToken();}
-function updateBadge(has){var b=document.getElementById('tokenBadge'),d=document.getElementById('tokenDelBtn');if(!b)return;if(has){b.className='token-badge';b.innerHTML='🔐 토큰 저장됨';d.style.display='';}else{b.className='token-badge none';b.innerHTML='저장된 토큰 없음';d.style.display='none';}}
-async function testToken(){showSt('tokenSt','tokenDot','tokenMsg','spin','확인 중...');try{var r=await fetch('https://api.github.com/repos/'+OWNER+'/'+REPO,{headers:{'Authorization':'Bearer '+getToken(),'Accept':'application/vnd.github.v3+json'}});if(r.ok)showSt('tokenSt','tokenDot','tokenMsg','ok','연결 성공 ✓');else{var d=await r.json();showSt('tokenSt','tokenDot','tokenMsg','err','오류: '+(d.message||r.status));}}catch(e){showSt('tokenSt','tokenDot','tokenMsg','err','네트워크 오류');}}
+function enc(s){var o='';for(var i=0;i<s.length;i++)o+=String.fromCharCode(s.charCodeAt(i)^XK.charCodeAt(i%XK.length));return btoa(o);}
+function dec(e){try{var s=atob(e),o='';for(var i=0;i<s.length;i++)o+=String.fromCharCode(s.charCodeAt(i)^XK.charCodeAt(i%XK.length));return o;}catch(e){return '';}}
+
+/* ══ 키 저장/불러오기 ══ */
+function saveKey(type){
+  var inputId=type==='gh'?'ghToken':'aiKey';
+  var storeKey=type==='gh'?GH_KEY:AI_KEY;
+  var v=document.getElementById(inputId).value.trim();
+  if(!v){showSt(type==='gh'?'ghSt':'aiSt',type==='gh'?'ghDot':'aiDot',type==='gh'?'ghMsg':'aiMsg','err','값을 입력해주세요');return;}
+  localStorage.setItem(storeKey,enc(v));
+  document.getElementById(inputId).value='';
+  updateBadge(type,true);
+  showSt(type==='gh'?'ghSt':'aiSt',type==='gh'?'ghDot':'aiDot',type==='gh'?'ghMsg':'aiMsg','ok','저장됐어요 ✓');
+  if(type==='ai') updateAIKeyStatus();
+}
+function loadKey(type){var e=localStorage.getItem(type==='gh'?GH_KEY:AI_KEY);return e?dec(e):'';}
+function deleteKey(type){if(!confirm('삭제?'))return;localStorage.removeItem(type==='gh'?GH_KEY:AI_KEY);updateBadge(type,false);if(type==='ai')updateAIKeyStatus();}
+function getGHToken(){return(document.getElementById('ghToken')?document.getElementById('ghToken').value.trim():'')||loadKey('gh');}
+function getAIKey(){return(document.getElementById('aiKey')?document.getElementById('aiKey').value.trim():'')||loadKey('ai');}
+function updateBadge(type,has){
+  var badgeId=type==='gh'?'ghBadge':'aiBadge',delId=type==='gh'?'ghDelBtn':'aiDelBtn';
+  var b=document.getElementById(badgeId),d=document.getElementById(delId);if(!b)return;
+  if(has){b.className='token-badge';b.innerHTML=type==='gh'?'🔐 토큰 저장됨':'🤖 API 키 저장됨';d.style.display='';}
+  else{b.className='token-badge none';b.innerHTML='저장 안됨';d.style.display='none';}
+}
+function updateAIKeyStatus(){
+  var el=document.getElementById('aiKeyStatus');if(!el)return;
+  el.textContent=loadKey('ai')?'API 키 연결됨 ✓':'API 키 없음 — 위 설정에서 저장하세요';
+}
+async function testGH(){
+  showSt('ghSt','ghDot','ghMsg','spin','확인 중...');
+  try{var r=await fetch('https://api.github.com/repos/'+OWNER+'/'+REPO,{headers:{'Authorization':'Bearer '+getGHToken(),'Accept':'application/vnd.github.v3+json'}});
+  if(r.ok)showSt('ghSt','ghDot','ghMsg','ok','연결 성공 ✓');else{var d=await r.json();showSt('ghSt','ghDot','ghMsg','err','오류: '+(d.message||r.status));}}
+  catch(e){showSt('ghSt','ghDot','ghMsg','err','네트워크 오류');}
+}
 
 /* ══ 관리자 탭 ══ */
 function switchATab(id){
@@ -340,21 +406,157 @@ function switchATab(id){
   document.getElementById('atab-'+id).classList.add('visible');
 }
 
+/* ══ Claude API 호출 ══ */
+async function askClaude(){
+  var apiKey=getAIKey();
+  if(!apiKey){
+    var chatEl=document.getElementById('chatOutput');
+    chatEl.className='claude-chat-area';
+    chatEl.textContent='API 키가 없어요. 위 설정에서 Anthropic API 키를 먼저 저장해주세요.';
+    return;
+  }
+  var input=document.getElementById('claudeInput').value.trim();
+  if(!input) return;
+
+  var chatEl=document.getElementById('chatOutput');
+  chatEl.className='claude-chat-area';
+
+  // 회의록 컨텍스트 구성
+  var context='당신은 라이브 데이터라는 AI 스타트업의 AX팀 회의 준비를 도와주는 어시스턴트예요.\n\n';
+  context+='회사 주요 사업 컨텍스트:\n';
+  context+='- 디유넷(LXP 플랫폼 업체)과 협력해 대학교에 AI 솔루션(AI보조교사, 기초학력진단, AI튜터) 납품\n';
+  context+='- 현재 우석대 SaaS 계약 협상 중, AI튜터 개발 필요, 원광대 영어강의 오류 이슈\n';
+  context+='- 예스24 디지털 참고서 AI 기능 개발 논의 중\n';
+  context+='- 삼성자산운용 ETF 에이전트 제안 제출 완료\n';
+  context+='- 경기연구원 PoC 추진 중\n\n';
+  context+='사용자의 요청에 맞게 회의 논의 주제를 간결하게 정리해주세요.\n';
+  context+='주제 정리 시 반드시 다음 JSON 형식을 포함해주세요 (다른 설명도 함께 써도 됩니다):\n';
+  context+='```json\n[{"topic":"주제명","notes":"간략한 메모"},{"topic":"주제명","notes":"간략한 메모"}]\n```\n';
+  context+='주제는 5개 이내로 핵심적인 것만 정리하세요.';
+
+  chatHistory.push({role:'user',content:input});
+  document.getElementById('claudeInput').value='';
+  document.getElementById('askBtn').disabled=true;
+  document.getElementById('typingIndicator').style.display='block';
+
+  // 대화 히스토리 표시
+  renderChat('...');
+
+  try{
+    var res=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+        'x-api-key':apiKey,
+        'anthropic-version':'2023-06-01',
+        'anthropic-dangerous-direct-browser-access':'true'
+      },
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:1500,
+        system:context,
+        messages:chatHistory
+      })
+    });
+    var data=await res.json();
+    if(data.error){
+      chatHistory.pop();
+      renderChat('');
+      document.getElementById('chatOutput').textContent='오류: '+data.error.message;
+    } else {
+      var reply=data.content[0].text;
+      chatHistory.push({role:'assistant',content:reply});
+      renderChat('');
+      // JSON 파싱 시도
+      extractTopics(reply);
+    }
+  }catch(e){
+    chatHistory.pop();
+    renderChat('');
+    document.getElementById('chatOutput').textContent='API 호출 실패: '+e.message;
+  }
+  document.getElementById('typingIndicator').style.display='none';
+  document.getElementById('askBtn').disabled=false;
+}
+
+function renderChat(typing){
+  var el=document.getElementById('chatOutput');
+  el.className='claude-chat-area';
+  var html='';
+  chatHistory.forEach(function(m){
+    if(m.role==='user'){
+      html+='<div style="margin-bottom:10px"><span style="font-size:11px;font-weight:500;color:#888780">나</span><br>'+esc(m.content)+'</div>';
+    } else {
+      // JSON 블록 하이라이트
+      var content=m.content.replace(/```json([\s\S]*?)```/g,function(match,json){
+        return '<span style="font-size:11px;background:#EEEDFE;color:#3C3489;padding:4px 8px;border-radius:4px;display:inline-block;margin:2px 0">[주제 JSON 파싱됨]</span>';
+      });
+      html+='<div style="margin-bottom:10px"><span style="font-size:11px;font-weight:500;color:#534AB7">✦ Claude</span><br>'+content+'</div>';
+    }
+  });
+  if(typing) html+='<div style="color:#888780;font-size:12px">입력 중...</div>';
+  el.innerHTML=html;
+  el.scrollTop=el.scrollHeight;
+}
+
+function extractTopics(text){
+  var match=text.match(/```json([\s\S]*?)```/);
+  if(match){
+    try{
+      var topics=JSON.parse(match[1].trim());
+      if(Array.isArray(topics)&&topics.length){
+        parsedTopics=topics;
+        selectedTopics=new Set(topics.map(function(_,i){return i;}));
+        renderTopicChips();
+        document.getElementById('topicApplyBox').style.display='block';
+      }
+    }catch(e){}
+  }
+}
+
+function renderTopicChips(){
+  var el=document.getElementById('topicChips');
+  el.innerHTML=parsedTopics.map(function(t,i){
+    return '<span class="topic-chip'+(selectedTopics.has(i)?' selected':'')+'" onclick="toggleTopicChip('+i+')">'
+      +(selectedTopics.has(i)?'✓ ':'')+esc(t.topic)
+      +'</span>';
+  }).join('');
+}
+function toggleTopicChip(i){
+  if(selectedTopics.has(i))selectedTopics.delete(i);else selectedTopics.add(i);
+  renderTopicChips();
+}
+function applySelectedTopics(){
+  parsedTopics.forEach(function(t,i){
+    if(selectedTopics.has(i)) preTopics.push({topic:t.topic,notes:t.notes||''});
+  });
+  // 빈 항목 제거
+  preTopics=preTopics.filter(function(t){return t.topic;});
+  if(!preTopics.length) preTopics=[{topic:'',notes:''}];
+  renderPreTopics();
+  document.getElementById('topicApplyBox').style.display='none';
+  showToast('✓ '+selectedTopics.size+'개 주제가 폼에 추가됐어요');
+}
+function applyAllTopics(){
+  selectedTopics=new Set(parsedTopics.map(function(_,i){return i;}));
+  applySelectedTopics();
+}
+function clearChat(){chatHistory=[];parsedTopics=[];selectedTopics=new Set();var el=document.getElementById('chatOutput');el.className='claude-chat-area empty';el.textContent='Claude에게 회의 맥락을 설명하면 논의 주제를 정리해드려요.';document.getElementById('topicApplyBox').style.display='none';}
+
 /* ══ 사전 회의 생성 ══ */
 function renderPreTopics(){
   var el=document.getElementById('preTopicList');
   el.innerHTML=preTopics.map(function(t,i){
     return '<div class="topic-row">'
-      +'<input type="text" class="ti" placeholder="주제 (예: 우석대 계약 가격)" value="'+esc(t.topic)+'" oninput="preTopics['+i+'].topic=this.value">'
+      +'<input type="text" class="ti" placeholder="주제" value="'+esc(t.topic)+'" oninput="preTopics['+i+'].topic=this.value">'
       +'<input type="text" class="tn" placeholder="사전 메모 (선택)" value="'+esc(t.notes)+'" oninput="preTopics['+i+'].notes=this.value">'
       +'<button class="btn btn-sm btn-danger" onclick="removePreTopic('+i+')">✕</button>'
       +'</div>';
   }).join('');
 }
 function addPreTopic(){preTopics.push({topic:'',notes:''});renderPreTopics();}
-function removePreTopic(i){preTopics.splice(i,1);renderPreTopics();}
-
-function getDow(dateStr){var d=new Date(dateStr);return['일','월','화','수','목','금','토'][d.getDay()];}
+function removePreTopic(i){preTopics.splice(i,1);if(!preTopics.length)preTopics=[{topic:'',notes:''}];renderPreTopics();}
+function getDow(d){return['일','월','화','수','목','금','토'][new Date(d).getDay()];}
 function makeId(date,title){return date.replace(/-/g,'')+'_'+title.replace(/[^가-힣a-zA-Z0-9]/g,'_').slice(0,20);}
 
 async function createPreMeeting(){
@@ -363,188 +565,88 @@ async function createPreMeeting(){
   var attendees=document.getElementById('preAttendees').value.trim();
   var type=document.getElementById('preType').value;
   if(!date||!title){showSt('preSt','preDot','preMsg','err','날짜와 제목은 필수예요');return;}
-  if(!getToken()){showSt('preSt','preDot','preMsg','err','토큰이 없어요');return;}
+  if(!getGHToken()){showSt('preSt','preDot','preMsg','err','GitHub 토큰이 없어요');return;}
+  var validTopics=preTopics.filter(function(t){return t.topic;});
   var newM={
-    id:makeId(date,title),
-    date:date,dow:getDow(date),
-    title:title,duration:'예정',attendees:attendees||'미정',type:type,
-    topics:preTopics.filter(function(t){return t.topic;}).map(function(t){return t.topic;}),
-    status:'planned',
-    preTopics:preTopics.filter(function(t){return t.topic;}),
-    discussions:[],followups:[],
-    summary:'',agendas:[],actions:[],risks:[],opportunities:[],memo:'',links:[],files:[]
+    id:makeId(date,title),date:date,dow:getDow(date),title:title,
+    duration:'예정',attendees:attendees||'미정',type:type,
+    topics:validTopics.map(function(t){return t.topic;}),
+    status:'planned',preTopics:validTopics,
+    discussions:[],followups:[],summary:'',
+    agendas:[],actions:[],risks:[],opportunities:[],
+    memo:'',links:[],files:[]
   };
   showSt('preSt','preDot','preMsg','spin','생성 중...');
-  var ok=await pushToGithub(newM,'사전 회의 생성: '+title);
+  var ok=await pushNew(newM,'사전 회의 생성: '+title);
   if(ok){
-    showSt('preSt','preDot','preMsg','ok','생성 완료! ✓ 뷰어에서 확인하세요');
-    preTopics=[{topic:'',notes:''}];
-    renderPreTopics();
+    showSt('preSt','preDot','preMsg','ok','생성 완료! ✓');
+    preTopics=[{topic:'',notes:''}];renderPreTopics();
     document.getElementById('preTitle').value='';
     document.getElementById('preAttendees').value='';
-    meetings.push(newM);
-    meetings.sort(function(a,b){return b.date.localeCompare(a.date);});
-    if(document.getElementById('editList')) buildEditList();
+    chatHistory=[];parsedTopics=[];
+    var el=document.getElementById('chatOutput');el.className='claude-chat-area empty';
+    el.textContent='Claude에게 회의 맥락을 설명하면 논의 주제를 정리해드려요.';
+    document.getElementById('topicApplyBox').style.display='none';
+  } else {
+    showSt('preSt','preDot','preMsg','err','생성 실패 — 토큰을 확인해주세요');
   }
 }
 
 /* ══ JSON 추가 ══ */
-function validateJson(){
-  var txt=document.getElementById('newJson').value.trim();
-  try{var d=JSON.parse(txt);if(Array.isArray(d)){showSt('addSt','addDot','addMsg','err','객체 { } 하나만');return;}if(!d.id||!d.date||!d.title){showSt('addSt','addDot','addMsg','err','id, date, title 필요');return;}showSt('addSt','addDot','addMsg','ok','JSON 정상 ✓ id: '+d.id);}catch(e){showSt('addSt','addDot','addMsg','err','JSON 오류: '+e.message);}
-}
+function validateJson(){var txt=document.getElementById('newJson').value.trim();try{var d=JSON.parse(txt);if(Array.isArray(d)){showSt('addSt','addDot','addMsg','err','객체 {} 하나만');return;}if(!d.id||!d.date||!d.title){showSt('addSt','addDot','addMsg','err','id, date, title 필요');return;}showSt('addSt','addDot','addMsg','ok','정상 ✓ id: '+d.id);}catch(e){showSt('addSt','addDot','addMsg','err','JSON 오류: '+e.message);}}
 async function addMeeting(){
-  if(!getToken()){showSt('addSt','addDot','addMsg','err','토큰 없음');return;}
-  var txt=document.getElementById('newJson').value.trim();
-  var newM;try{newM=JSON.parse(txt);}catch(e){showSt('addSt','addDot','addMsg','err','JSON 오류');return;}
+  if(!getGHToken()){showSt('addSt','addDot','addMsg','err','토큰 없음');return;}
+  var newM;try{newM=JSON.parse(document.getElementById('newJson').value.trim());}catch(e){showSt('addSt','addDot','addMsg','err','JSON 오류');return;}
   if(Array.isArray(newM)||!newM.id||!newM.date||!newM.title){showSt('addSt','addDot','addMsg','err','형식 오류');return;}
-  // 기본 필드 보장
-  newM.status=newM.status||'completed';
-  newM.discussions=newM.discussions||[];
-  newM.followups=newM.followups||[];
+  newM.status=newM.status||'completed';newM.discussions=newM.discussions||[];newM.followups=newM.followups||[];
   showSt('addSt','addDot','addMsg','spin','추가 중...');
-  var ok=await pushToGithub(newM,'회의록 추가: '+newM.title);
+  var ok=await pushNew(newM,'회의록 추가: '+newM.title);
   if(ok){showSt('addSt','addDot','addMsg','ok','추가 완료! 총 '+meetings.length+'개 ✓');document.getElementById('newJson').value='';}
+  else showSt('addSt','addDot','addMsg','err','실패');
 }
 
-/* ══ pushToGithub (append) ══ */
-async function pushToGithub(newM, commitMsg){
+/* ══ GitHub Push (append) ══ */
+async function pushNew(newM,commitMsg){
   try{
-    var gr=await fetch('https://api.github.com/repos/'+OWNER+'/'+REPO+'/contents/meetings.json',{headers:{'Authorization':'Bearer '+getToken(),'Accept':'application/vnd.github.v3+json'}});
+    var gr=await fetch('https://api.github.com/repos/'+OWNER+'/'+REPO+'/contents/meetings.json',{headers:{'Authorization':'Bearer '+getGHToken(),'Accept':'application/vnd.github.v3+json'}});
     var existing=[],sha=null;
     if(gr.ok){var gd=await gr.json();sha=gd.sha;existing=JSON.parse(decodeURIComponent(escape(atob(gd.content.replace(/\n/g,'')))));}
-    if(existing.find(function(m){return m.id===newM.id;})){showSt('addSt','addDot','addMsg','err','이미 같은 id 존재: '+newM.id);return false;}
-    existing.push(newM);
-    existing.sort(function(a,b){return b.date.localeCompare(a.date);});
-    meetings=existing;
+    if(existing.find(function(m){return m.id===newM.id;})){showSt('preSt','preDot','preMsg','err','이미 같은 id 존재: '+newM.id);return false;}
+    existing.push(newM);existing.sort(function(a,b){return b.date.localeCompare(a.date);});meetings=existing;
     var content=btoa(unescape(encodeURIComponent(JSON.stringify(existing,null,2))));
-    var pr=await fetch('https://api.github.com/repos/'+OWNER+'/'+REPO+'/contents/meetings.json',{method:'PUT',headers:{'Authorization':'Bearer '+getToken(),'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},body:JSON.stringify({message:commitMsg,content:content,sha:sha})});
+    var pr=await fetch('https://api.github.com/repos/'+OWNER+'/'+REPO+'/contents/meetings.json',{method:'PUT',headers:{'Authorization':'Bearer '+getGHToken(),'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},body:JSON.stringify({message:commitMsg,content:content,sha:sha})});
+    if(pr.ok){if(document.getElementById('editList'))buildEditList();}
     return pr.ok;
   }catch(e){return false;}
 }
 
 /* ══ 편집 목록 ══ */
 function buildEditList(){
-  meetings.forEach(function(m){
-    if(!editState[m.id]) editState[m.id]={
-      status:m.status||'completed',
-      preTopics:(m.preTopics||[]).map(function(t){return {topic:t.topic||'',notes:t.notes||''}}),
-      discussions:(m.discussions||[]).slice(),
-      followups:(m.followups||[]).map(function(f){return {id:f.id||Date.now()+'',text:f.text,done:f.done||false,due:f.due||''}}),
-      memo:m.memo||'',
-      links:(m.links||[]).map(function(l){return {title:l.title||'',url:l.url||''}}),
-      files:(m.files||[]).slice()
-    };
-  });
+  meetings.forEach(function(m){if(!editState[m.id])editState[m.id]={status:m.status||'completed',preTopics:(m.preTopics||[]).map(function(t){return{topic:t.topic||'',notes:t.notes||''}}),discussions:(m.discussions||[]).slice(),followups:(m.followups||[]).map(function(f){return{id:f.id||Date.now()+'',text:f.text,done:f.done||false,due:f.due||''}}),memo:m.memo||'',links:(m.links||[]).map(function(l){return{title:l.title||'',url:l.url||''}}),files:(m.files||[]).slice()};});
   var el=document.getElementById('editList');if(!el)return;
-  el.innerHTML=meetings.map(function(m){
-    var ds=m.date.slice(5).replace('-','/')+'('+m.dow+')';
-    var isPlanned=(m.status==='planned');
-    return '<div class="edit-card" id="ec_'+m.id+'">'
-      +'<div class="edit-head" onclick="toggleEdit(\''+m.id+'\')">'
-      +'<div class="edit-date-s">'+ds+'</div>'
-      +'<div class="edit-title-s">'+m.title+'</div>'
-      +(isPlanned?'<span class="badge b-purple" style="font-size:10px">📋 예정</span>':'')
-      +'<div class="edit-chev">⌄</div>'
-      +'</div>'
-      +'<div class="edit-body" id="eb_'+m.id+'">'+renderEditBody(m)+'</div>'
-      +'</div>';
-  }).join('');
+  el.innerHTML=meetings.map(function(m){var ds=m.date.slice(5).replace('-','/')+'('+m.dow+')';var isPlanned=(m.status==='planned');return '<div class="edit-card" id="ec_'+m.id+'"><div class="edit-head" onclick="toggleEdit(\''+m.id+'\')"><div class="edit-date-s">'+ds+'</div><div class="edit-title-s">'+m.title+'</div>'+(isPlanned?'<span class="badge b-purple" style="font-size:10px;margin-right:4px">📋 예정</span>':'')+'<button class="btn btn-sm btn-danger" style="flex-shrink:0;margin-right:6px" onclick="deleteMeeting(event,\''+m.id+'\')" title="이 회의록 삭제">🗑</button>'+'<div class="edit-chev">⌄</div></div><div class="edit-body" id="eb_'+m.id+'">'+renderEditBody(m)+'</div></div>';}).join('');
 }
 
 function renderEditBody(m){
-  var s=editState[m.id];
-  var isPlanned=s.status==='planned';
-  var statusHtml='<div class="esec"><div class="elabel">📌 회의 상태</div>'
-    +'<div class="fl">'
-    +'<select id="st_'+m.id+'" onchange="editState[\''+m.id+'\'].status=this.value;rerenderEdit(\''+m.id+'\')">'
-    +'<option value="planned"'+(isPlanned?' selected':'')+'>📋 예정 (회의 전)</option>'
-    +'<option value="completed"'+(!isPlanned?' selected':'')+'>✓ 완료 (회의 후)</option>'
-    +'</select></div></div>';
-
-  // 사전 주제 (planned일 때)
+  var s=editState[m.id];var isPlanned=s.status==='planned';
+  var statusHtml='<div class="esec"><div class="elabel">상태</div><select id="st_'+m.id+'" onchange="editState[\''+m.id+'\'].status=this.value;rerenderEdit(\''+m.id+'\')"><option value="planned"'+(isPlanned?' selected':'')+'>📋 예정</option><option value="completed"'+(!isPlanned?' selected':'')+'>✓ 완료</option></select></div>';
   var preHtml='';
-  if(isPlanned){
-    var ptRows=s.preTopics.map(function(t,i){
-      return '<div class="topic-row">'
-        +'<input type="text" class="ti" placeholder="주제" value="'+esc(t.topic)+'" oninput="editState[\''+m.id+'\'].preTopics['+i+'].topic=this.value">'
-        +'<input type="text" class="tn" placeholder="사전 메모" value="'+esc(t.notes)+'" oninput="editState[\''+m.id+'\'].preTopics['+i+'].notes=this.value">'
-        +'<button class="btn btn-sm btn-danger" onclick="removeEditPreTopic(\''+m.id+'\','+i+')">✕</button>'
-        +'</div>';
-    }).join('');
-    preHtml='<div class="esec"><div class="elabel">📋 사전 논의 주제</div>'
-      +'<div id="ept_'+m.id+'">'+ptRows+'</div>'
-      +'<button class="btn btn-sm" onclick="addEditPreTopic(\''+m.id+'\')">+ 주제 추가</button>'
-      +'</div>';
-  }
-
-  // 논의 내용 (completed일 때)
+  if(isPlanned){var ptRows=s.preTopics.map(function(t,i){return '<div class="topic-row"><input type="text" class="ti" placeholder="주제" value="'+esc(t.topic)+'" oninput="editState[\''+m.id+'\'].preTopics['+i+'].topic=this.value"><input type="text" class="tn" placeholder="사전 메모" value="'+esc(t.notes)+'" oninput="editState[\''+m.id+'\'].preTopics['+i+'].notes=this.value"><button class="btn btn-sm btn-danger" onclick="removeEditPreTopic(\''+m.id+'\','+i+')">✕</button></div>';}).join('');preHtml='<div class="esec"><div class="elabel">📋 사전 논의 주제</div><div id="ept_'+m.id+'">'+ptRows+'</div><button class="btn btn-sm" onclick="addEditPreTopic(\''+m.id+'\')">+ 추가</button></div>';}
   var discHtml='';
   if(!isPlanned){
-    var topics=s.preTopics.length?s.preTopics:[];
-    // 기존 preTopics 기반 + 자유 추가
-    var discRows=s.discussions.map(function(d,i){
-      return '<div class="disc-row">'
-        +'<div class="disc-topic">'+esc(d.topic||'주제 '+( i+1))+'</div>'
-        +'<textarea rows="2" placeholder="논의된 내용..." oninput="editState[\''+m.id+'\'].discussions['+i+'].content=this.value">'+esc(d.content||'')+'</textarea>'
-        +'<div style="margin-top:6px"><input type="text" placeholder="결론 / 결과 (선택)" value="'+esc(d.outcome||'')+'" oninput="editState[\''+m.id+'\'].discussions['+i+'].outcome=this.value"></div>'
-        +'<div style="margin-top:6px;text-align:right"><button class="btn btn-sm btn-danger" onclick="removeDisc(\''+m.id+'\','+i+')">삭제</button></div>'
-        +'</div>';
-    }).join('');
-    discHtml='<div class="esec"><div class="elabel">💬 주제별 논의 내용</div>'
-      +'<div id="disc_'+m.id+'">'+discRows+'</div>'
-      +'<div class="fl" style="gap:6px;margin-top:6px">'
-      +'<input type="text" id="discTopic_'+m.id+'" placeholder="새 논의 주제" style="flex:1">'
-      +'<button class="btn btn-sm" onclick="addDisc(\''+m.id+'\')">+ 추가</button>'
-      +'</div></div>';
-
-    // 팔로업 체크리스트
-    var fuRows=s.followups.map(function(f,i){
-      return '<div class="fu-item">'
-        +'<input type="text" placeholder="팔로업 항목" value="'+esc(f.text||'')+'" oninput="editState[\''+m.id+'\'].followups['+i+'].text=this.value">'
-        +'<input type="date" value="'+esc(f.due||'')+'" oninput="editState[\''+m.id+'\'].followups['+i+'].due=this.value">'
-        +'<button class="btn btn-sm btn-danger" onclick="removeFu(\''+m.id+'\','+i+')">✕</button>'
-        +'</div>';
-    }).join('');
-    discHtml+='<div class="esec"><div class="elabel">✅ 팔로업 체크리스트</div>'
-      +'<div id="fu_'+m.id+'">'+fuRows+'</div>'
-      +'<button class="btn btn-sm" onclick="addFu(\''+m.id+'\')">+ 항목 추가</button>'
-      +'</div>';
+    var discRows=s.discussions.map(function(d,i){return '<div class="disc-row"><div class="disc-topic">'+esc(d.topic||'주제 '+(i+1))+'</div><textarea rows="2" oninput="editState[\''+m.id+'\'].discussions['+i+'].content=this.value">'+esc(d.content||'')+'</textarea><div style="margin-top:6px"><input type="text" placeholder="결론/결과" value="'+esc(d.outcome||'')+'" oninput="editState[\''+m.id+'\'].discussions['+i+'].outcome=this.value"></div><div style="margin-top:6px;text-align:right"><button class="btn btn-sm btn-danger" onclick="removeDisc(\''+m.id+'\','+i+')">삭제</button></div></div>';}).join('');
+    var fuRows=s.followups.map(function(f,i){return '<div class="fu-item"><input type="text" placeholder="팔로업 항목" value="'+esc(f.text||'')+'" oninput="editState[\''+m.id+'\'].followups['+i+'].text=this.value"><input type="date" value="'+esc(f.due||'')+'" oninput="editState[\''+m.id+'\'].followups['+i+'].due=this.value"><button class="btn btn-sm btn-danger" onclick="removeFu(\''+m.id+'\','+i+')">✕</button></div>';}).join('');
+    discHtml='<div class="esec"><div class="elabel">💬 주제별 논의 내용</div><div id="disc_'+m.id+'">'+discRows+'</div><div style="display:flex;gap:6px;margin-top:6px"><input type="text" id="discTopic_'+m.id+'" placeholder="새 논의 주제" style="flex:1"><button class="btn btn-sm" onclick="addDisc(\''+m.id+'\')">+ 추가</button></div></div>'+'<div class="esec"><div class="elabel">✅ 팔로업 체크리스트</div><div id="fu_'+m.id+'">'+fuRows+'</div><button class="btn btn-sm" onclick="addFu(\''+m.id+'\')">+ 항목 추가</button></div>';
   }
-
-  // 메모·링크·파일
-  var linksH=s.links.map(function(l,i){
-    return '<div class="link-item"><input type="text" placeholder="제목" value="'+esc(l.title)+'" oninput="editState[\''+m.id+'\'].links['+i+'].title=this.value" style="max-width:160px"><input type="url" placeholder="https://" value="'+esc(l.url)+'" oninput="editState[\''+m.id+'\'].links['+i+'].url=this.value"><button class="btn btn-sm btn-danger" onclick="removeLink(\''+m.id+'\','+i+')">✕</button></div>';
-  }).join('');
-  var filesH=s.files.map(function(f,i){
-    return '<div class="fitem"><a href="'+f.url+'" target="_blank">📎 '+esc(f.name)+'</a><span class="fsize">'+f.size+'</span><button class="btn btn-sm btn-danger" onclick="removeFile(\''+m.id+'\','+i+')">✕</button></div>';
-  }).join('');
-
-  var extraHtml='<div class="esec"><div class="elabel">📝 추가 메모</div>'
-    +'<textarea rows="3" oninput="editState[\''+m.id+'\'].memo=this.value">'+esc(s.memo)+'</textarea></div>'
-    +'<div class="esec"><div class="elabel">🔗 외부 링크</div>'
-    +'<div id="lk_'+m.id+'">'+linksH+'</div>'
-    +'<button class="btn btn-sm" onclick="addLink(\''+m.id+'\')">+ 링크 추가</button></div>'
-    +'<div class="esec"><div class="elabel">📁 파일 첨부</div>'
-    +'<div id="fl_'+m.id+'">'+filesH+'</div>'
-    +'<div class="upload-zone" id="uz_'+m.id+'" onclick="document.getElementById(\'fi_'+m.id+'\').click()" ondragover="dragOver(event,\''+m.id+'\')" ondragleave="dragLeave(\''+m.id+'\')" ondrop="dropFile(event,\''+m.id+'\')">'
-    +'파일 드래그 또는 클릭'
-    +'<input type="file" id="fi_'+m.id+'" multiple style="display:none" onchange="uploadFiles(\''+m.id+'\',this.files)">'
-    +'</div>'
-    +'<div class="uprog" id="up_'+m.id+'"></div></div>';
-
-  return statusHtml+preHtml+discHtml+extraHtml
-    +'<div class="divider"></div>'
-    +'<button class="btn btn-primary" onclick="saveMeeting(\''+m.id+'\')">저장 및 GitHub 동기화</button>'
-    +'<div class="sr" id="ms_'+m.id+'" style="display:none;margin-top:10px">'
-    +'<div class="dot" id="md_'+m.id+'"></div><span id="mm_'+m.id+'"></span></div>';
+  var linksH=s.links.map(function(l,i){return '<div class="link-item"><input type="text" placeholder="제목" value="'+esc(l.title)+'" oninput="editState[\''+m.id+'\'].links['+i+'].title=this.value" style="max-width:160px"><input type="url" placeholder="https://" value="'+esc(l.url)+'" oninput="editState[\''+m.id+'\'].links['+i+'].url=this.value"><button class="btn btn-sm btn-danger" onclick="removeLink(\''+m.id+'\','+i+')">✕</button></div>';}).join('');
+  var filesH=s.files.map(function(f,i){return '<div class="fitem"><a href="'+f.url+'" target="_blank">📎 '+esc(f.name)+'</a><span class="fsize">'+f.size+'</span><button class="btn btn-sm btn-danger" onclick="removeFile(\''+m.id+'\','+i+')">✕</button></div>';}).join('');
+  var extraHtml='<div class="esec"><div class="elabel">📝 메모</div><textarea rows="3" oninput="editState[\''+m.id+'\'].memo=this.value">'+esc(s.memo)+'</textarea></div><div class="esec"><div class="elabel">🔗 링크</div><div id="lk_'+m.id+'">'+linksH+'</div><button class="btn btn-sm" onclick="addLink(\''+m.id+'\')">+ 추가</button></div><div class="esec"><div class="elabel">📁 파일</div><div id="fl_'+m.id+'">'+filesH+'</div><div class="upload-zone" id="uz_'+m.id+'" onclick="document.getElementById(\'fi_'+m.id+'\').click()" ondragover="dragOver(event,\''+m.id+'\')" ondragleave="dragLeave(\''+m.id+'\')" ondrop="dropFile(event,\''+m.id+'\')">파일 드래그 또는 클릭<input type="file" id="fi_'+m.id+'" multiple style="display:none" onchange="uploadFiles(\''+m.id+'\',this.files)"></div><div class="uprog" id="up_'+m.id+'"></div></div>';
+  return statusHtml+preHtml+discHtml+extraHtml+'<div class="divider"></div><button class="btn btn-primary" onclick="saveMeeting(\''+m.id+'\')">저장 및 GitHub 동기화</button><div class="sr" id="ms_'+m.id+'" style="display:none;margin-top:10px"><div class="dot" id="md_'+m.id+'"></div><span id="mm_'+m.id+'"></span></div>';
 }
 
 function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 function toggleEdit(id){document.getElementById('ec_'+id).classList.toggle('open');}
-function rerenderEdit(id){var m=meetings.find(function(x){return x.id===id;});if(m){document.getElementById('eb_'+id).innerHTML=renderEditBody(m);}}
-
-// 편집 상태 함수들
+function rerenderEdit(id){var m=meetings.find(function(x){return x.id===id;});if(m)document.getElementById('eb_'+id).innerHTML=renderEditBody(m);}
 function addEditPreTopic(id){editState[id].preTopics.push({topic:'',notes:''});rerenderEdit(id);}
 function removeEditPreTopic(id,i){editState[id].preTopics.splice(i,1);rerenderEdit(id);}
 function addDisc(id){var t=document.getElementById('discTopic_'+id).value.trim()||('주제 '+(editState[id].discussions.length+1));editState[id].discussions.push({topic:t,content:'',outcome:''});rerenderEdit(id);}
@@ -555,265 +657,106 @@ function addLink(id){editState[id].links.push({title:'',url:''});rerenderEditLin
 function removeLink(id,i){editState[id].links.splice(i,1);rerenderEditLinks(id);}
 function rerenderEditLinks(id){document.getElementById('lk_'+id).innerHTML=editState[id].links.map(function(l,i){return '<div class="link-item"><input type="text" placeholder="제목" value="'+esc(l.title)+'" oninput="editState[\''+id+'\'].links['+i+'].title=this.value" style="max-width:160px"><input type="url" placeholder="https://" value="'+esc(l.url)+'" oninput="editState[\''+id+'\'].links['+i+'].url=this.value"><button class="btn btn-sm btn-danger" onclick="removeLink(\''+id+'\','+i+')">✕</button></div>';}).join('');}
 function removeFile(id,i){editState[id].files.splice(i,1);document.getElementById('fl_'+id).innerHTML=editState[id].files.map(function(f,i){return '<div class="fitem"><a href="'+f.url+'" target="_blank">📎 '+esc(f.name)+'</a><span class="fsize">'+f.size+'</span><button class="btn btn-sm btn-danger" onclick="removeFile(\''+id+'\','+i+')">✕</button></div>';}).join('');}
-
-// 파일 업로드
 function dragOver(e,id){e.preventDefault();document.getElementById('uz_'+id).classList.add('drag');}
 function dragLeave(id){document.getElementById('uz_'+id).classList.remove('drag');}
 function dropFile(e,id){e.preventDefault();dragLeave(id);uploadFiles(id,e.dataTransfer.files);}
-async function uploadFiles(id,fileList){
-  if(!getToken()){showMeetSt(id,'err','토큰 없음');return;}
-  var prog=document.getElementById('up_'+id);prog.style.display='block';
-  for(var i=0;i<fileList.length;i++){
-    var file=fileList[i];prog.textContent='업로드 중: '+file.name+'...';
-    try{var b64=await readB64(file);var path='files/'+id+'/'+file.name;var sha=await getSha(path);var r=await ghPut(path,b64,'파일 업로드: '+file.name,sha);
-    if(r.ok){editState[id].files.push({name:file.name,url:'https://raw.githubusercontent.com/'+OWNER+'/'+REPO+'/main/'+path,size:fmtSz(file.size)});document.getElementById('fl_'+id).innerHTML=editState[id].files.map(function(f,i){return '<div class="fitem"><a href="'+f.url+'" target="_blank">📎 '+esc(f.name)+'</a><span class="fsize">'+f.size+'</span><button class="btn btn-sm btn-danger" onclick="removeFile(\''+id+'\','+i+')">✕</button></div>';}).join('');prog.textContent='✓ 완료';}
-    else{prog.textContent='✗ 실패';}}catch(e){prog.textContent='✗ '+e.message;}
-  }setTimeout(function(){prog.style.display='none';},3000);
-}
+async function uploadFiles(id,fileList){if(!getGHToken()){showMeetSt(id,'err','토큰 없음');return;}var prog=document.getElementById('up_'+id);prog.style.display='block';for(var i=0;i<fileList.length;i++){var file=fileList[i];prog.textContent='업로드: '+file.name;try{var b64=await readB64(file);var path='files/'+id+'/'+file.name;var sha=await getSha(path);var r=await ghPut(path,b64,'파일: '+file.name,sha);if(r.ok){editState[id].files.push({name:file.name,url:'https://raw.githubusercontent.com/'+OWNER+'/'+REPO+'/main/'+path,size:fmtSz(file.size)});document.getElementById('fl_'+id).innerHTML=editState[id].files.map(function(f,i){return '<div class="fitem"><a href="'+f.url+'" target="_blank">📎 '+esc(f.name)+'</a><span class="fsize">'+f.size+'</span><button class="btn btn-sm btn-danger" onclick="removeFile(\''+id+'\','+i+')">✕</button></div>';}).join('');prog.textContent='✓ 완료';}else prog.textContent='✗ 실패';}catch(e){prog.textContent='✗ '+e.message;}}setTimeout(function(){prog.style.display='none';},3000);}
 function readB64(file){return new Promise(function(res,rej){var fr=new FileReader();fr.onload=function(){res(fr.result.split(',')[1]);};fr.onerror=rej;fr.readAsDataURL(file);});}
-function fmtSz(b){if(b<1024)return b+'B';if(b<1048576)return Math.round(b/1024)+'KB';return (b/1048576).toFixed(1)+'MB';}
+function fmtSz(b){if(b<1024)return b+'B';if(b<1048576)return Math.round(b/1024)+'KB';return(b/1048576).toFixed(1)+'MB';}
+async function saveMeeting(id){if(!getGHToken()){showMeetSt(id,'err','토큰 없음');return;}showMeetSt(id,'spin','저장 중...');var s=editState[id];var idx=meetings.findIndex(function(m){return m.id===id;});if(idx<0){showMeetSt(id,'err','찾을 수 없음');return;}meetings[idx].status=s.status;meetings[idx].preTopics=s.preTopics;meetings[idx].discussions=s.discussions;meetings[idx].followups=s.followups;meetings[idx].memo=s.memo;meetings[idx].links=s.links.filter(function(l){return l.url;});meetings[idx].files=s.files;var sorted=meetings.slice().sort(function(a,b){return b.date.localeCompare(a.date);});var content=btoa(unescape(encodeURIComponent(JSON.stringify(sorted,null,2))));var sha=await getSha('meetings.json');var r=await ghPut('meetings.json',content,'업데이트: '+meetings[idx].title,sha);if(r.ok)showMeetSt(id,'ok','저장 완료 ✓');else{var ed=await r.json();showMeetSt(id,'err','실패: '+(ed.message||r.status));}}
 
-// 저장
-async function saveMeeting(id){
-  if(!getToken()){showMeetSt(id,'err','토큰 없음');return;}
-  showMeetSt(id,'spin','저장 중...');
-  var s=editState[id];var idx=meetings.findIndex(function(m){return m.id===id;});
-  if(idx<0){showMeetSt(id,'err','찾을 수 없음');return;}
-  meetings[idx].status=s.status;
-  meetings[idx].preTopics=s.preTopics;
-  meetings[idx].discussions=s.discussions;
-  meetings[idx].followups=s.followups;
-  meetings[idx].memo=s.memo;
-  meetings[idx].links=s.links.filter(function(l){return l.url;});
-  meetings[idx].files=s.files;
-  var sorted=meetings.slice().sort(function(a,b){return b.date.localeCompare(a.date);});
-  var content=btoa(unescape(encodeURIComponent(JSON.stringify(sorted,null,2))));
-  var sha=await getSha('meetings.json');
-  var r=await ghPut('meetings.json',content,'회의록 업데이트: '+meetings[idx].title,sha);
-  if(r.ok)showMeetSt(id,'ok','저장 완료 ✓');
-  else{var ed=await r.json();showMeetSt(id,'err','실패: '+(ed.message||r.status));}
-}
 
-/* ══ GitHub API ══ */
-async function ghGet(path){return fetch('https://api.github.com/repos/'+OWNER+'/'+REPO+'/contents/'+path,{headers:{'Authorization':'Bearer '+getToken(),'Accept':'application/vnd.github.v3+json'}});}
-async function ghPut(path,content,msg,sha){var b={message:msg,content:content};if(sha)b.sha=sha;return fetch('https://api.github.com/repos/'+OWNER+'/'+REPO+'/contents/'+path,{method:'PUT',headers:{'Authorization':'Bearer '+getToken(),'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},body:JSON.stringify(b)});}
-async function getSha(path){try{var r=await ghGet(path);if(r.ok){var d=await r.json();return d.sha;}}catch(e){}return null;}
-
-/* ══ 팔로업 체크박스 (뷰어) ══ */
-async function toggleFollowup(meetingId, fuIdx){
-  var m=meetings.find(function(x){return x.id===meetingId;});
-  if(!m||!m.followups||!m.followups[fuIdx])return;
-  m.followups[fuIdx].done=!m.followups[fuIdx].done;
-  // 즉시 UI 업데이트
-  render();
-  // 토큰 있으면 자동 저장
-  var tk=loadToken();
-  if(!tk){showToast('체크 반영됨 (토큰 없어 로컬만 저장)');return;}
-  showToast('저장 중...');
+async function deleteMeeting(e,id){
+  e.stopPropagation();
+  var m=meetings.find(function(x){return x.id===id;});
+  if(!m)return;
+  if(!confirm('['+m.date+'] '+m.title+'\n\n이 회의록을 삭제할까요? 되돌릴 수 없어요.'))return;
+  if(!getGHToken()){showToast('GitHub 토큰이 없어요');return;}
+  showToast('삭제 중...');
   try{
+    var backup=meetings.slice();
+    meetings=meetings.filter(function(x){return x.id!==id;});
     var sorted=meetings.slice().sort(function(a,b){return b.date.localeCompare(a.date);});
     var content=btoa(unescape(encodeURIComponent(JSON.stringify(sorted,null,2))));
     var sha=await getSha('meetings.json');
-    var r=await ghPut('meetings.json',content,'팔로업 업데이트: '+m.title,sha);
-    if(r.ok)showToast('✓ 저장됨');else showToast('저장 실패');
-  }catch(e){showToast('오류: '+e.message);}
+    var r=await ghPut('meetings.json',content,'회의록 삭제: '+m.title,sha);
+    if(r.ok){delete editState[id];showToast('✓ 삭제됐어요');buildEditList();}
+    else{meetings=backup;showToast('삭제 실패');}
+  }catch(err){showToast('오류: '+err.message);}
 }
 
-function showToast(msg){var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2500);}
+/* ══ GitHub API ══ */
+async function ghGet(path){return fetch('https://api.github.com/repos/'+OWNER+'/'+REPO+'/contents/'+path,{headers:{'Authorization':'Bearer '+getGHToken(),'Accept':'application/vnd.github.v3+json'}});}
+async function ghPut(path,content,msg,sha){var b={message:msg,content:content};if(sha)b.sha=sha;return fetch('https://api.github.com/repos/'+OWNER+'/'+REPO+'/contents/'+path,{method:'PUT',headers:{'Authorization':'Bearer '+getGHToken(),'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},body:JSON.stringify(b)});}
+async function getSha(path){try{var r=await ghGet(path);if(r.ok){var d=await r.json();return d.sha;}}catch(e){}return null;}
+
+/* ══ 팔로업 체크 ══ */
+async function toggleFollowup(meetingId,fuIdx){var m=meetings.find(function(x){return x.id===meetingId;});if(!m||!m.followups||!m.followups[fuIdx])return;m.followups[fuIdx].done=!m.followups[fuIdx].done;render();var tk=loadKey('gh');if(!tk){showToast('체크 반영됨');return;}showToast('저장 중...');try{var sorted=meetings.slice().sort(function(a,b){return b.date.localeCompare(a.date);});var content=btoa(unescape(encodeURIComponent(JSON.stringify(sorted,null,2))));var sha=await getSha('meetings.json');var r=await ghPut('meetings.json',content,'팔로업 업데이트: '+m.title,sha);showToast(r.ok?'✓ 저장됨':'저장 실패');}catch(e){showToast('오류');}}
 
 /* ══ 상태 표시 ══ */
 function showSt(rowId,dotId,msgId,t,m){document.getElementById(rowId).style.display='flex';document.getElementById(dotId).className='dot '+t;document.getElementById(msgId).textContent=m;}
 function showMeetSt(id,t,m){showSt('ms_'+id,'md_'+id,'mm_'+id,t,m);}
+function showToast(msg){var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2500);}
 
 /* ══ 초기화 ══ */
 async function init(){
-  if(isAdmin){document.getElementById('adminWrap').style.display='block';document.getElementById('hubWrap').style.display='none';updateBadge(!!localStorage.getItem(TK_KEY));renderPreTopics();}
-  try{
-    var res=await fetch('./meetings.json?t='+Date.now());
-    if(!res.ok)throw new Error('HTTP '+res.status);
-    meetings=await res.json();
-    meetings.sort(function(a,b){return b.date.localeCompare(a.date);});
-    if(isAdmin)buildEditList();else{buildFilters();render();}
-  }catch(e){
-    var msg='불러오기 실패: '+e.message;
-    if(isAdmin)document.getElementById('editList').innerHTML='<div style="color:#A32D2D;font-size:13px">'+msg+'</div>';
-    else document.getElementById('list').innerHTML='<div class="empty">'+msg+'</div>';
-  }
+  if(isAdmin){document.getElementById('adminWrap').style.display='block';document.getElementById('hubWrap').style.display='none';updateBadge('gh',!!localStorage.getItem(GH_KEY));updateBadge('ai',!!localStorage.getItem(AI_KEY));renderPreTopics();updateAIKeyStatus();}
+  try{var res=await fetch('./meetings.json?t='+Date.now());if(!res.ok)throw new Error('HTTP '+res.status);meetings=await res.json();meetings.sort(function(a,b){return b.date.localeCompare(a.date);});if(isAdmin)buildEditList();else{buildFilters();render();}}
+  catch(e){var msg='불러오기 실패: '+e.message;if(isAdmin)document.getElementById('editList').innerHTML='<div style="color:#A32D2D;font-size:13px">'+msg+'</div>';else document.getElementById('list').innerHTML='<div class="empty">'+msg+'</div>';}
 }
 
 /* ══ 허브 뷰어 ══ */
-function buildFilters(){
-  var months={},topics={};
-  meetings.forEach(function(m){months[m.date.slice(0,7)]=true;(m.topics||[]).forEach(function(t){topics[t]=true;});});
-  var ms=document.getElementById('filterMonth');
-  Object.keys(months).sort().reverse().forEach(function(ym){var o=document.createElement('option');o.value=ym;o.textContent=ym.replace('-','년 ')+'월';ms.appendChild(o);});
-  var ts=document.getElementById('filterTopic');
-  Object.keys(topics).sort().forEach(function(t){var o=document.createElement('option');o.value=t;o.textContent=t;ts.appendChild(o);});
-}
+function buildFilters(){var months={},topics={};meetings.forEach(function(m){months[m.date.slice(0,7)]=true;(m.topics||[]).forEach(function(t){topics[t]=true;});});var ms=document.getElementById('filterMonth');Object.keys(months).sort().reverse().forEach(function(ym){var o=document.createElement('option');o.value=ym;o.textContent=ym.replace('-','년 ')+'월';ms.appendChild(o);});var ts=document.getElementById('filterTopic');Object.keys(topics).sort().forEach(function(t){var o=document.createElement('option');o.value=t;o.textContent=t;ts.appendChild(o);});}
 
 function render(){
   var q=(document.getElementById('searchQ').value||'').toLowerCase();
   var month=document.getElementById('filterMonth').value;
   var status=document.getElementById('filterStatus').value;
   var topic=document.getElementById('filterTopic').value;
-  var filtered=meetings.filter(function(m){
-    if(month&&!m.date.startsWith(month))return false;
-    if(status&&(m.status||'completed')!==status)return false;
-    if(topic&&!(m.topics||[]).includes(topic))return false;
-    if(q){
-      var pt=(m.preTopics||[]).map(function(t){return t.topic+' '+t.notes;}).join(' ');
-      var dc=(m.discussions||[]).map(function(d){return d.topic+' '+d.content+' '+d.outcome;}).join(' ');
-      var fu=(m.followups||[]).map(function(f){return f.text;}).join(' ');
-      var ag=(m.agendas||[]).map(function(a){return a.title+' '+(a.points||[]).join(' ');}).join(' ');
-      var hay=[m.title,m.summary,m.attendees,m.type,(m.topics||[]).join(' '),(m.actions||[]).map(function(a){return a.text;}).join(' '),ag,m.memo||'',pt,dc,fu].join(' ').toLowerCase();
-      if(!hay.includes(q))return false;
-    }
-    return true;
-  });
+  var filtered=meetings.filter(function(m){if(month&&!m.date.startsWith(month))return false;if(status&&(m.status||'completed')!==status)return false;if(topic&&!(m.topics||[]).includes(topic))return false;if(q){var pt=(m.preTopics||[]).map(function(t){return t.topic+' '+t.notes;}).join(' ');var dc=(m.discussions||[]).map(function(d){return d.topic+' '+d.content+' '+d.outcome;}).join(' ');var fu=(m.followups||[]).map(function(f){return f.text;}).join(' ');var ag=(m.agendas||[]).map(function(a){return a.title+' '+(a.points||[]).join(' ');}).join(' ');var hay=[m.title,m.summary,m.attendees,m.type,(m.topics||[]).join(' '),(m.actions||[]).map(function(a){return a.text;}).join(' '),ag,m.memo||'',pt,dc,fu].join(' ').toLowerCase();if(!hay.includes(q))return false;}return true;});
   var planned=meetings.filter(function(m){return(m.status||'completed')==='planned';}).length;
-  document.getElementById('stats').innerHTML=
-    '<div class="stat">전체 <span>'+meetings.length+'</span>건</div>'
-    +'<div class="stat">검색 <span>'+filtered.length+'</span>건</div>'
-    +(planned?'<div class="stat">📋 예정 <span>'+planned+'</span>건</div>':'')
-    +'<div class="stat">액션 <span>'+meetings.reduce(function(s,m){return s+(m.actions||[]).length;},0)+'</span>개</div>';
+  document.getElementById('stats').innerHTML='<div class="stat">전체 <span>'+meetings.length+'</span>건</div><div class="stat">검색 <span>'+filtered.length+'</span>건</div>'+(planned?'<div class="stat">📋 예정 <span>'+planned+'</span>건</div>':'')+'<div class="stat">액션 <span>'+meetings.reduce(function(s,m){return s+(m.actions||[]).length;},0)+'</span>개</div>';
   var list=document.getElementById('list');
   if(!filtered.length){list.innerHTML='<div class="empty">검색 결과가 없습니다</div>';return;}
-  list.innerHTML=filtered.map(function(m){return renderMeetingCard(m,q);}).join('');
+  list.innerHTML=filtered.map(function(m){return renderCard(m,q);}).join('');
 }
 
-function renderMeetingCard(m,q){
-  var d=new Date(m.date);
-  var mon=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][d.getMonth()];
-  var day=String(d.getDate()).padStart(2,'0');
+function renderCard(m,q){
+  var d=new Date(m.date),mon=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][d.getMonth()],day=String(d.getDate()).padStart(2,'0');
   var isExp=!!expanded[m.id],atab=activeTabs[m.id]||'default',aidx=activeAgenda[m.id]||0;
   var isPlanned=(m.status||'completed')==='planned';
-  var hasMemo=m.memo&&m.memo.trim();
-  var hasAtt=(m.links&&m.links.length)||(m.files&&m.files.length);
-  var hasDisc=m.discussions&&m.discussions.length;
-  var hasFu=m.followups&&m.followups.length;
+  var hasMemo=m.memo&&m.memo.trim(),hasAtt=(m.links&&m.links.length)||(m.files&&m.files.length);
+  var hasDisc=m.discussions&&m.discussions.length,hasFu=m.followups&&m.followups.length;
   var doneFu=hasFu?m.followups.filter(function(f){return f.done;}).length:0;
-
-  var topicHtml=(m.topics||[]).map(function(t){
-    var hit=q&&t.toLowerCase().includes(q);
-    return '<span class="topic-tag'+(hit?' hit':'')+'">'+(t.length>8?t.slice(0,8)+'…':t)+'</span>';
-  }).join('');
-
-  // 기본 탭 결정
-  if(atab==='default') atab=isPlanned?'pretopics':'agenda';
-
+  var topicHtml=(m.topics||[]).map(function(t){var hit=q&&t.toLowerCase().includes(q);return '<span class="topic-tag'+(hit?' hit':'')+'">'+(t.length>8?t.slice(0,8)+'…':t)+'</span>';}).join('');
+  if(atab==='default')atab=isPlanned?'pretopics':'agenda';
   var det='';
   if(isExp){
-    // 탭 구성
     var tabs=[],lbs=[];
     if(isPlanned){tabs.push('pretopics');lbs.push('📋 사전 주제');}
-    else{
-      if(m.agendas&&m.agendas.length){tabs.push('agenda');lbs.push('안건별 상세');}
-      if(m.actions&&m.actions.length){tabs.push('actions');lbs.push('액션 아이템');}
-      if(m.risks&&m.risks.length){tabs.push('risks');lbs.push('이슈·기회');}
-      if(hasDisc){tabs.push('disc');lbs.push('💬 논의 내용');}
-      if(hasFu){tabs.push('followup');lbs.push('✅ 팔로업'+(hasFu?' ('+doneFu+'/'+hasFu+')':''));}
-    }
-    if(hasMemo){tabs.push('memo');lbs.push('메모');}
-    if(hasAtt){tabs.push('attach');lbs.push('첨부 ('+(((m.links||[]).length)+((m.files||[]).length))+')');}
-    if(!tabs.length){tabs=['empty'];lbs=['내용 없음'];}
-    // 현재 탭이 유효한지 확인
+    else{if(m.agendas&&m.agendas.length){tabs.push('agenda');lbs.push('안건별 상세');}if(m.actions&&m.actions.length){tabs.push('actions');lbs.push('액션 아이템');}if(m.risks&&m.risks.length){tabs.push('risks');lbs.push('이슈·기회');}if(hasDisc){tabs.push('disc');lbs.push('💬 논의 내용');}if(hasFu){tabs.push('followup');lbs.push('✅ 팔로업'+(hasFu?' ('+doneFu+'/'+hasFu+')':''));}}
+    if(hasMemo){tabs.push('memo');lbs.push('메모');}if(hasAtt){tabs.push('attach');lbs.push('첨부 ('+(((m.links||[]).length)+((m.files||[]).length))+')');} if(!tabs.length){tabs=['empty'];lbs=['내용 없음'];}
     if(!tabs.includes(atab))atab=tabs[0];
-
     var tbH=tabs.map(function(t,i){return '<button class="dtab'+(atab===t?' active':'')+'" onclick="setTab(event,\''+m.id+'\',\''+t+'\')">'+lbs[i]+'</button>';}).join('');
-
-    // 탭 콘텐츠
     var contents='';
-
-    // 사전 주제
-    if(tabs.includes('pretopics')){
-      var ptH=(m.preTopics||[]).map(function(t){
-        return '<div class="pre-topic-card">'
-          +'<div class="pre-topic-title">'+esc(t.topic)+'</div>'
-          +(t.notes?'<div class="pre-topic-notes">'+esc(t.notes)+'</div>':'')
-          +'</div>';
-      }).join('')||'<div style="color:#888780;font-size:13px">사전 주제 없음</div>';
-      contents+='<div class="dtab-c'+(atab==='pretopics'?' visible':'')+'">'+ptH+'<div style="margin-top:12px;font-size:12px;color:#888780">회의 후 관리자 패널에서 논의 내용과 팔로업을 추가하세요.</div></div>';
-    }
-
-    // 안건
-    if(tabs.includes('agenda')){
-      var ags=m.agendas||[],agN=ags.map(function(ag,i){var s=ag.title.split('—')[0].split('·')[0].trim();if(s.length>14)s=s.slice(0,14)+'…';return '<div class="ag-chip'+(aidx===i?' active':'')+'" onclick="setAgenda(event,\''+m.id+'\','+i+')">'+s+'</div>';}).join(''),cur=ags[aidx]||{};
-      var agD=cur.title?'<div class="ag-detail"><div class="ag-title">'+cur.title+'</div><ul class="pts">'+(cur.points||[]).map(function(p){return '<li>'+p+'</li>';}).join('')+'</ul></div>':'';
-      contents+='<div class="dtab-c'+(atab==='agenda'?' visible':'')+'"><div class="ag-nav">'+agN+'</div>'+agD+'</div>';
-    }
-
-    // 액션
-    if(tabs.includes('actions')){
-      var sl={s_urgent:'긴급',s_ongoing:'진행중',s_pending:'예정',s_risk:'리스크'};
-      var aR=(m.actions||[]).map(function(a){var sk=a.status.replace('-','_');return '<div class="arow"><div>'+a.text+'</div><div>'+a.owner+'</div><div>'+a.due+'</div><div><span class="'+a.status+'">'+(sl[sk]||a.status)+'</span></div></div>';}).join('');
-      contents+='<div class="dtab-c'+(atab==='actions'?' visible':'')+'"><div class="act-grid"><div class="act-head">항목</div><div class="act-head">담당</div><div class="act-head">기한</div><div class="act-head">상태</div>'+aR+'</div></div>';
-    }
-
-    // 이슈
-    if(tabs.includes('risks')){
-      var riH=(m.risks||[]).map(function(r){return '<div class="risk-item">'+r+'</div>';}).join('')+(m.opportunities||[]).map(function(o){return '<div class="opp-item">'+o+'</div>';}).join('');
-      contents+='<div class="dtab-c'+(atab==='risks'?' visible':'')+'"><div class="sec-lbl">리스크</div>'+(m.risks||[]).map(function(r){return '<div class="risk-item">'+r+'</div>';}).join('')+'<div class="sec-lbl">기회</div>'+(m.opportunities||[]).map(function(o){return '<div class="opp-item">'+o+'</div>';}).join('')+'</div>';
-    }
-
-    // 논의 내용
-    if(tabs.includes('disc')){
-      var discH=(m.discussions||[]).map(function(d){
-        return '<div class="disc-view-card">'
-          +'<div class="disc-view-topic"><span class="chip">주제</span>'+esc(d.topic||'')+'</div>'
-          +'<div class="disc-view-content">'+esc(d.content||'(내용 없음)')+'</div>'
-          +(d.outcome?'<div class="disc-outcome">→ '+esc(d.outcome)+'</div>':'')
-          +'</div>';
-      }).join('');
-      contents+='<div class="dtab-c'+(atab==='disc'?' visible':'')+'">'+discH+'</div>';
-    }
-
-    // 팔로업 체크리스트
-    if(tabs.includes('followup')){
-      var fuH=(m.followups||[]).map(function(f,i){
-        return '<div class="fu-check-item'+(f.done?' done':'')+'">'
-          +'<input type="checkbox" class="fu-checkbox"'+(f.done?' checked':'')+' onclick="toggleFollowup(\''+m.id+'\','+i+')">'
-          +'<div style="flex:1">'
-          +'<div class="fu-text">'+esc(f.text||'')+'</div>'
-          +(f.due?'<div class="fu-due">📅 '+f.due+'</div>':'')
-          +'</div>'
-          +'</div>';
-      }).join('');
-      contents+='<div class="dtab-c'+(atab==='followup'?' visible':'')+'"><div class="fu-list">'+fuH+'</div>'
-        +'<div style="margin-top:10px;font-size:12px;color:#888780">체크 시 자동으로 저장됩니다</div></div>';
-    }
-
-    // 메모
+    if(tabs.includes('pretopics')){var ptH=(m.preTopics||[]).map(function(t){return '<div class="pre-topic-card"><div class="pre-topic-title">'+esc(t.topic)+'</div>'+(t.notes?'<div class="pre-topic-notes">'+esc(t.notes)+'</div>':'')+'</div>';}).join('')||'<div style="color:#888780;font-size:13px">사전 주제 없음</div>';contents+='<div class="dtab-c'+(atab==='pretopics'?' visible':'')+'">'+ptH+'<div style="margin-top:12px;font-size:12px;color:#888780">회의 후 관리자 패널에서 논의 내용과 팔로업을 추가하세요.</div></div>';}
+    if(tabs.includes('agenda')){var ags=m.agendas||[],agN=ags.map(function(ag,i){var s=ag.title.split('—')[0].split('·')[0].trim();if(s.length>14)s=s.slice(0,14)+'…';return '<div class="ag-chip'+(aidx===i?' active':'')+'" onclick="setAgenda(event,\''+m.id+'\','+i+')">'+s+'</div>';}).join(''),cur=ags[aidx]||{};var agD=cur.title?'<div class="ag-detail"><div class="ag-title">'+cur.title+'</div><ul class="pts">'+(cur.points||[]).map(function(p){return '<li>'+p+'</li>';}).join('')+'</ul></div>':'';contents+='<div class="dtab-c'+(atab==='agenda'?' visible':'')+'"><div class="ag-nav">'+agN+'</div>'+agD+'</div>';}
+    if(tabs.includes('actions')){var sl={s_urgent:'긴급',s_ongoing:'진행중',s_pending:'예정',s_risk:'리스크'};var aR=(m.actions||[]).map(function(a){var sk=a.status.replace('-','_');return '<div class="arow"><div>'+a.text+'</div><div>'+a.owner+'</div><div>'+a.due+'</div><div><span class="'+a.status+'">'+(sl[sk]||a.status)+'</span></div></div>';}).join('');contents+='<div class="dtab-c'+(atab==='actions'?' visible':'')+'"><div class="act-grid"><div class="act-head">항목</div><div class="act-head">담당</div><div class="act-head">기한</div><div class="act-head">상태</div>'+aR+'</div></div>';}
+    if(tabs.includes('risks')){contents+='<div class="dtab-c'+(atab==='risks'?' visible':'')+'"><div class="sec-lbl">리스크</div>'+(m.risks||[]).map(function(r){return '<div class="risk-item">'+r+'</div>';}).join('')+'<div class="sec-lbl">기회</div>'+(m.opportunities||[]).map(function(o){return '<div class="opp-item">'+o+'</div>';}).join('')+'</div>';}
+    if(tabs.includes('disc')){var discH=(m.discussions||[]).map(function(d){return '<div class="disc-view-card"><div class="disc-view-topic"><span class="chip">주제</span>'+esc(d.topic||'')+'</div><div class="disc-view-content">'+esc(d.content||'(내용 없음)')+'</div>'+(d.outcome?'<div class="disc-outcome">→ '+esc(d.outcome)+'</div>':'')+'</div>';}).join('');contents+='<div class="dtab-c'+(atab==='disc'?' visible':'')+'">'+discH+'</div>';}
+    if(tabs.includes('followup')){var fuH=(m.followups||[]).map(function(f,i){return '<div class="fu-check-item'+(f.done?' done':'')+'" id="fui_'+m.id+'_'+i+'"><input type="checkbox" class="fu-checkbox"'+(f.done?' checked':'')+' onclick="toggleFollowup(\''+m.id+'\','+i+')"><div style="flex:1"><div class="fu-text">'+esc(f.text||'')+'</div>'+(f.due?'<div class="fu-due">📅 '+f.due+'</div>':'')+'</div></div>';}).join('');contents+='<div class="dtab-c'+(atab==='followup'?' visible':'')+'"><div class="fu-list">'+fuH+'</div><div style="margin-top:10px;font-size:12px;color:#888780">체크 시 자동 저장</div></div>';}
     if(tabs.includes('memo')){contents+='<div class="dtab-c'+(atab==='memo'?' visible':'')+'"><div class="memo-box">'+(m.memo||'메모 없음')+'</div></div>';}
-
-    // 첨부
-    if(tabs.includes('attach')){
-      var linksH=(m.links||[]).map(function(l){return '<a class="attach-link" href="'+l.url+'" target="_blank"><span>🔗</span><span class="lbl">'+esc(l.title||l.url)+'</span><span style="font-size:11px;color:#888780">↗</span></a>';}).join('');
-      var filesH=(m.files||[]).map(function(f){return '<div class="attach-file"><a href="'+f.url+'" target="_blank">📎 '+esc(f.name)+'</a><span class="meta">'+f.size+'</span></div>';}).join('');
-      contents+='<div class="dtab-c'+(atab==='attach'?' visible':'')+'">'+((m.links||[]).length?'<div class="sec-lbl">링크</div>'+linksH:'')+((m.files||[]).length?'<div class="sec-lbl">파일</div>'+filesH:'')+'</div>';
-    }
-
+    if(tabs.includes('attach')){var linksH=(m.links||[]).map(function(l){return '<a class="attach-link" href="'+l.url+'" target="_blank"><span>🔗</span><span class="lbl">'+esc(l.title||l.url)+'</span><span style="font-size:11px;color:#888780">↗</span></a>';}).join('');var filesH=(m.files||[]).map(function(f){return '<div class="attach-file"><a href="'+f.url+'" target="_blank">📎 '+esc(f.name)+'</a><span class="meta">'+f.size+'</span></div>';}).join('');contents+='<div class="dtab-c'+(atab==='attach'?' visible':'')+'">'+((m.links||[]).length?'<div class="sec-lbl">링크</div>'+linksH:'')+((m.files||[]).length?'<div class="sec-lbl">파일</div>'+filesH:'')+'</div>';}
     det='<div class="m-detail"><div class="dtabs">'+tbH+'</div>'+contents+'</div>';
   }
-
-  var typeBadge=isPlanned
-    ?'<span class="badge b-purple">📋 예정</span>'
-    :'<span class="badge b-teal">'+m.type+'</span>';
-
-  var fuBadge=hasFu?'<span style="font-size:10px;color:'+(doneFu===hasFu?'#639922':'#888780')+'">'+(doneFu===hasFu?'✅':'☐')+' '+doneFu+'/'+hasFu+'</span>':'';
-
-  return '<div class="m-card'+(isExp?' expanded':'')+(isPlanned?' planned-card':'')+'" id="mc_'+m.id+'">'
-    +'<div class="m-head" onclick="toggle(\''+m.id+'\')">'
-    +'<div class="m-date-block"><div class="m-month">'+mon+'</div><div class="m-day">'+day+'</div><div class="m-dow">'+m.dow+'</div></div>'
-    +'<div class="m-info"><div class="m-title">'+m.title+(hasMemo?' <span style="font-size:10px;color:#b4b2a9">📝</span>':'')+(hasAtt?' <span style="font-size:10px;color:#b4b2a9">📎</span>':'')+' '+fuBadge+'</div>'
-    +'<div class="m-meta"><span class="badge b-gray">'+m.duration+'</span><span class="badge b-blue">'+m.attendees+'</span>'+typeBadge+'</div>'
-    +'<div class="m-topics">'+topicHtml+'</div></div>'
-    +'<div class="m-chev">⌄</div></div>'+det+'</div>';
+  var typeBadge=isPlanned?'<span class="badge b-purple">📋 예정</span>':'<span class="badge b-teal">'+m.type+'</span>';
+  var fuBadge=hasFu?'<span style="font-size:10px;color:'+(doneFu===hasFu?'#639922':'#888780')+';margin-left:4px">'+(doneFu===hasFu?'✅':'☐')+' '+doneFu+'/'+hasFu+'</span>':'';
+  return '<div class="m-card'+(isExp?' expanded':'')+(isPlanned?' planned-card':'')+'" id="mc_'+m.id+'"><div class="m-head" onclick="toggle(\''+m.id+'\')"><div class="m-date-block"><div class="m-month">'+mon+'</div><div class="m-day">'+day+'</div><div class="m-dow">'+m.dow+'</div></div><div class="m-info"><div class="m-title">'+m.title+(hasMemo?' <span style="font-size:10px;color:#b4b2a9">📝</span>':'')+(hasAtt?' <span style="font-size:10px;color:#b4b2a9">📎</span>':'')+fuBadge+'</div><div class="m-meta"><span class="badge b-gray">'+m.duration+'</span><span class="badge b-blue">'+m.attendees+'</span>'+typeBadge+'</div><div class="m-topics">'+topicHtml+'</div></div><div class="m-chev">⌄</div></div>'+det+'</div>';
 }
 
 function toggle(id){expanded[id]=!expanded[id];if(expanded[id]&&!activeTabs[id]){var m=meetings.find(function(x){return x.id===id;});activeTabs[id]=(m&&(m.status||'completed')==='planned')?'pretopics':'agenda';}render();}
 function setTab(e,id,tab){e.stopPropagation();activeTabs[id]=tab;render();}
 function setAgenda(e,id,idx){e.stopPropagation();activeAgenda[id]=idx;render();}
-
 init();
 </script>
 </body>
