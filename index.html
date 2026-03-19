@@ -268,6 +268,28 @@ ul.pts li::before{content:"·";position:absolute;left:0;color:#b4b2a9}
         </div>
       </div>
 
+      <!-- JSON 붙여넣기 모드 토글 -->
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+        <span style="font-size:12px;color:#5f5e5a;font-weight:500">입력 방식:</span>
+        <button class="btn btn-sm" id="modeClaudeBtn" onclick="switchPreMode('claude')" style="background:#EEEDFE;color:#3C3489;border-color:#AFA9EC">✦ Claude AI</button>
+        <button class="btn btn-sm" id="modeJsonBtn" onclick="switchPreMode('json')">📋 JSON 붙여넣기</button>
+        <span style="font-size:11px;color:#888780">API 한도 초과 시 JSON 모드를 사용하세요</span>
+      </div>
+
+      <!-- JSON 붙여넣기 모드 -->
+      <div id="jsonPasteMode" style="display:none;margin-bottom:14px">
+        <div style="background:#FAEEDA;border:0.5px solid #FAC775;border-radius:8px;padding:.75rem 1rem;font-size:12px;color:#412402;line-height:1.7;margin-bottom:10px">
+          <strong>사용 방법:</strong> Claude(claude.ai) 대화에서 사전 회의 주제 정리를 요청 → JSON 복사 버튼 클릭 → 아래에 붙여넣기 → 자동 입력
+        </div>
+        <textarea id="preJsonInput" rows="8" placeholder='{"id":"20260320_meeting","date":"2026-03-20","title":"회의 제목","attendees":"참석자","type":"미팅","preTopics":[{"topic":"주제1","notes":"메모1"}]}'></textarea>
+        <div class="hint">Claude가 출력한 JSON 또는 claude.ai 위젯의 "JSON 복사" 버튼으로 복사한 내용을 붙여넣으세요</div>
+        <div style="display:flex;gap:8px;margin-top:8px">
+          <button class="btn btn-sm btn-primary" onclick="applyJsonToForm()">폼에 자동 입력</button>
+          <button class="btn btn-sm" onclick="directRegisterJson()">바로 GitHub에 등록</button>
+        </div>
+        <div class="sr" id="jsonPasteSt" style="display:none;margin-top:8px"><div class="dot" id="jsonPasteDot"></div><span id="jsonPasteMsg"></span></div>
+      </div>
+
       <!-- 회의 기본 정보 -->
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
         <div>
@@ -631,7 +653,14 @@ function renderEditBody(m){
   var s=editState[m.id];var isPlanned=s.status==='planned';
   var statusHtml='<div class="esec"><div class="elabel">상태</div><select id="st_'+m.id+'" onchange="editState[\''+m.id+'\'].status=this.value;rerenderEdit(\''+m.id+'\')"><option value="planned"'+(isPlanned?' selected':'')+'>📋 예정</option><option value="completed"'+(!isPlanned?' selected':'')+'>✓ 완료</option></select></div>';
   var preHtml='';
-  if(isPlanned){var ptRows=s.preTopics.map(function(t,i){return '<div class="topic-row"><input type="text" class="ti" placeholder="주제" value="'+esc(t.topic)+'" oninput="editState[\''+m.id+'\'].preTopics['+i+'].topic=this.value"><input type="text" class="tn" placeholder="사전 메모" value="'+esc(t.notes)+'" oninput="editState[\''+m.id+'\'].preTopics['+i+'].notes=this.value"><button class="btn btn-sm btn-danger" onclick="removeEditPreTopic(\''+m.id+'\','+i+')">✕</button></div>';}).join('');preHtml='<div class="esec"><div class="elabel">📋 사전 논의 주제</div><div id="ept_'+m.id+'">'+ptRows+'</div><button class="btn btn-sm" onclick="addEditPreTopic(\''+m.id+'\')">+ 추가</button></div>';}
+  if(isPlanned){
+    var ptRows=s.preTopics.map(function(t,i){return '<div class="topic-row"><input type="text" class="ti" placeholder="주제" value="'+esc(t.topic)+'" oninput="editState[\''+m.id+'\'].preTopics['+i+'].topic=this.value"><input type="text" class="tn" placeholder="사전 메모" value="'+esc(t.notes)+'" oninput="editState[\''+m.id+'\'].preTopics['+i+'].notes=this.value"><button class="btn btn-sm btn-danger" onclick="removeEditPreTopic(\''+m.id+'\','+i+')">✕</button></div>';}).join('');
+    preHtml='<div class="esec"><div class="elabel">📋 사전 논의 주제</div><div id="ept_'+m.id+'">'+ptRows+'</div><button class="btn btn-sm" onclick="addEditPreTopic(\''+m.id+'\')">+ 추가</button></div>';
+  } else if(s.preTopics&&s.preTopics.length){
+    // 완료 상태에서도 사전 주제를 참고용으로 표시
+    var ptView=s.preTopics.map(function(t){return '<div style="padding:6px 10px;background:#EEEDFE;border-radius:6px;margin-bottom:6px;font-size:12px"><span style="font-weight:500;color:#3C3489">'+esc(t.topic)+'</span>'+(t.notes?'<span style="color:#534AB7;margin-left:8px">'+esc(t.notes)+'</span>':'')+'</div>';}).join('');
+    preHtml='<div class="esec"><div class="elabel" style="display:flex;align-items:center;justify-content:space-between">📋 사전 논의 주제 <button class="btn btn-sm btn-claude" onclick="importPreToDisc(\''+m.id+'\')" title="사전 주제를 논의 내용으로 이관">논의 내용으로 이관 ↓</button></div><div>'+ptView+'</div></div>';
+  }
   var discHtml='';
   if(!isPlanned){
     var discRows=s.discussions.map(function(d,i){return '<div class="disc-row"><div class="disc-topic">'+esc(d.topic||'주제 '+(i+1))+'</div><textarea rows="2" oninput="editState[\''+m.id+'\'].discussions['+i+'].content=this.value">'+esc(d.content||'')+'</textarea><div style="margin-top:6px"><input type="text" placeholder="결론/결과" value="'+esc(d.outcome||'')+'" oninput="editState[\''+m.id+'\'].discussions['+i+'].outcome=this.value"></div><div style="margin-top:6px;text-align:right"><button class="btn btn-sm btn-danger" onclick="removeDisc(\''+m.id+'\','+i+')">삭제</button></div></div>';}).join('');
@@ -647,6 +676,26 @@ function renderEditBody(m){
 function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 function toggleEdit(id){document.getElementById('ec_'+id).classList.toggle('open');}
 function rerenderEdit(id){var m=meetings.find(function(x){return x.id===id;});if(m)document.getElementById('eb_'+id).innerHTML=renderEditBody(m);}
+
+function importPreToDisc(id){
+  var s=editState[id];
+  if(!s||!s.preTopics||!s.preTopics.length)return;
+  var existingTopics=s.discussions.map(function(d){return d.topic;});
+  var added=0;
+  s.preTopics.forEach(function(t){
+    if(t.topic&&!existingTopics.includes(t.topic)){
+      s.discussions.push({topic:t.topic,content:'',outcome:''});
+      added++;
+    }
+  });
+  if(added>0){
+    rerenderEdit(id);
+    showToast('✓ '+added+'개 주제가 논의 내용으로 이관됐어요');
+  } else {
+    showToast('이미 모든 주제가 이관돼 있어요');
+  }
+}
+
 function addEditPreTopic(id){editState[id].preTopics.push({topic:'',notes:''});rerenderEdit(id);}
 function removeEditPreTopic(id,i){editState[id].preTopics.splice(i,1);rerenderEdit(id);}
 function addDisc(id){var t=document.getElementById('discTopic_'+id).value.trim()||('주제 '+(editState[id].discussions.length+1));editState[id].discussions.push({topic:t,content:'',outcome:''});rerenderEdit(id);}
@@ -665,6 +714,68 @@ function readB64(file){return new Promise(function(res,rej){var fr=new FileReade
 function fmtSz(b){if(b<1024)return b+'B';if(b<1048576)return Math.round(b/1024)+'KB';return(b/1048576).toFixed(1)+'MB';}
 async function saveMeeting(id){if(!getGHToken()){showMeetSt(id,'err','토큰 없음');return;}showMeetSt(id,'spin','저장 중...');var s=editState[id];var idx=meetings.findIndex(function(m){return m.id===id;});if(idx<0){showMeetSt(id,'err','찾을 수 없음');return;}meetings[idx].status=s.status;meetings[idx].preTopics=s.preTopics;meetings[idx].discussions=s.discussions;meetings[idx].followups=s.followups;meetings[idx].memo=s.memo;meetings[idx].links=s.links.filter(function(l){return l.url;});meetings[idx].files=s.files;var sorted=meetings.slice().sort(function(a,b){return b.date.localeCompare(a.date);});var content=btoa(unescape(encodeURIComponent(JSON.stringify(sorted,null,2))));var sha=await getSha('meetings.json');var r=await ghPut('meetings.json',content,'업데이트: '+meetings[idx].title,sha);if(r.ok)showMeetSt(id,'ok','저장 완료 ✓');else{var ed=await r.json();showMeetSt(id,'err','실패: '+(ed.message||r.status));}}
 
+
+
+/* ══ 사전 회의 입력 모드 전환 ══ */
+function switchPreMode(mode){
+  var isJson=mode==='json';
+  document.getElementById('claudePanel').style.display=isJson?'none':'block';
+  document.getElementById('jsonPasteMode').style.display=isJson?'block':'none';
+  document.getElementById('modeClaudeBtn').style.cssText=isJson?'':'background:#EEEDFE;color:#3C3489;border-color:#AFA9EC';
+  document.getElementById('modeJsonBtn').style.cssText=isJson?'background:#FAEEDA;color:#633806;border-color:#FAC775':'';
+}
+
+function applyJsonToForm(){
+  var txt=document.getElementById('preJsonInput').value.trim();
+  try{
+    var d=JSON.parse(txt);
+    if(d.date) document.getElementById('preDate').value=d.date;
+    if(d.title) document.getElementById('preTitle').value=d.title;
+    if(d.attendees) document.getElementById('preAttendees').value=d.attendees;
+    if(d.type){var sel=document.getElementById('preType');for(var i=0;i<sel.options.length;i++){if(sel.options[i].value===d.type){sel.selectedIndex=i;break;}}}
+    if(d.preTopics&&d.preTopics.length){
+      preTopics=d.preTopics.map(function(t){return{topic:t.topic||'',notes:t.notes||''};});
+      renderPreTopics();
+    }
+    switchPreMode('claude');
+    showSt('preSt','preDot','preMsg','ok','폼에 자동 입력됐어요! 확인 후 생성 버튼을 누르세요 ✓');
+  }catch(e){showSt('jsonPasteSt','jsonPasteDot','jsonPasteMsg','err','JSON 오류: '+e.message);}
+}
+
+async function directRegisterJson(){
+  var txt=document.getElementById('preJsonInput').value.trim();
+  var d;
+  try{d=JSON.parse(txt);}catch(e){showSt('jsonPasteSt','jsonPasteDot','jsonPasteMsg','err','JSON 오류: '+e.message);return;}
+  if(!d.id||!d.date||!d.title){showSt('jsonPasteSt','jsonPasteDot','jsonPasteMsg','err','id, date, title 필드가 필요해요');return;}
+  if(!getGHToken()){showSt('jsonPasteSt','jsonPasteDot','jsonPasteMsg','err','GitHub 토큰이 없어요');return;}
+  d.status=d.status||'planned';d.discussions=d.discussions||[];d.followups=d.followups||[];
+  showSt('jsonPasteSt','jsonPasteDot','jsonPasteMsg','spin','등록 중...');
+  var ok=await pushNew(d,'사전 회의 등록: '+d.title);
+  if(ok){showSt('jsonPasteSt','jsonPasteDot','jsonPasteMsg','ok','등록 완료! ✓');document.getElementById('preJsonInput').value='';}
+  else showSt('jsonPasteSt','jsonPasteDot','jsonPasteMsg','err','등록 실패');
+}
+
+/* ══ URL 파라미터 자동 입력 ══ */
+function checkUrlData(){
+  try{
+    var params=new URLSearchParams(location.search);
+    var raw=params.get('data');
+    if(!raw) return;
+    var json=JSON.parse(decodeURIComponent(escape(atob(raw))));
+    // URL 파라미터 제거 (토큰 노출 방지)
+    history.replaceState(null,'',location.pathname+'?admin');
+    // 폼에 자동 입력
+    if(json.date) document.getElementById('preDate').value=json.date;
+    if(json.title) document.getElementById('preTitle').value=json.title;
+    if(json.attendees) document.getElementById('preAttendees').value=json.attendees;
+    if(json.preTopics&&json.preTopics.length){
+      preTopics=json.preTopics.map(function(t){return{topic:t.topic||'',notes:t.notes||''};});
+      renderPreTopics();
+    }
+    showSt('preSt','preDot','preMsg','ok','Claude에서 데이터가 자동 입력됐어요! 확인 후 생성하세요 ✓');
+    showToast('✓ 사전 회의 데이터 자동 입력됨');
+  }catch(e){}
+}
 
 async function deleteMeeting(e,id){
   e.stopPropagation();
@@ -701,7 +812,7 @@ function showToast(msg){var t=document.getElementById('toast');t.textContent=msg
 /* ══ 초기화 ══ */
 async function init(){
   if(isAdmin){document.getElementById('adminWrap').style.display='block';document.getElementById('hubWrap').style.display='none';updateBadge('gh',!!localStorage.getItem(GH_KEY));updateBadge('ai',!!localStorage.getItem(AI_KEY));renderPreTopics();updateAIKeyStatus();}
-  try{var res=await fetch('./meetings.json?t='+Date.now());if(!res.ok)throw new Error('HTTP '+res.status);meetings=await res.json();meetings.sort(function(a,b){return b.date.localeCompare(a.date);});if(isAdmin)buildEditList();else{buildFilters();render();}}
+  try{var res=await fetch('./meetings.json?t='+Date.now());if(!res.ok)throw new Error('HTTP '+res.status);meetings=await res.json();meetings.sort(function(a,b){return b.date.localeCompare(a.date);});if(isAdmin){buildEditList();checkUrlData();}else{buildFilters();render();}}
   catch(e){var msg='불러오기 실패: '+e.message;if(isAdmin)document.getElementById('editList').innerHTML='<div style="color:#A32D2D;font-size:13px">'+msg+'</div>';else document.getElementById('list').innerHTML='<div class="empty">'+msg+'</div>';}
 }
 
