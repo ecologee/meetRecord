@@ -236,6 +236,23 @@
         "url": "https://raw.githubusercontent.com/ecologee/meetRecord/main/files/20260317_ceo/0317_유지영대표 조직전반 다운로드미팅.txt",
         "size": "34KB"
       }
+    ],
+    "status": "completed",
+    "preTopics": [],
+    "discussions": [],
+    "followups": [
+      {
+        "id": "1773900203002",
+        "text": "교사용 에이전트 개발, 사업에 대한 리뷰 일정, 계획 방향 등을 정리해서 언제쯤 한번 공유할 것인지를 이야기 해주면 좋겠다. ",
+        "done": false,
+        "due": "2026-03-25"
+      },
+      {
+        "id": "1773900226245",
+        "text": "천석경선생님하고 회의 하기",
+        "done": false,
+        "due": "2026-03-25"
+      }
     ]
   },
   {
@@ -411,17 +428,6 @@
         "name": "0317_황태훈님_대학교사업(디유넷 협력사업).txt",
         "url": "https://raw.githubusercontent.com/ecologee/meetRecord/main/files/20260317_univ/0317_황태훈님_대학교사업(디유넷 협력사업).txt",
         "size": "67KB"
-      }
-    ],
-    "status": "completed",
-    "preTopics": [],
-    "discussions": [],
-    "followups": [
-      {
-        "id": "1773900092056",
-        "text": "교사용 에이전트에 대한 1차 리뷰 일정을 잡아서  공유, 어떤 내용으로 중점적으로 할지 기획안",
-        "done": false,
-        "due": "2026-03-25"
       }
     ]
   },
