@@ -412,6 +412,17 @@
         "url": "https://raw.githubusercontent.com/ecologee/meetRecord/main/files/20260317_univ/0317_황태훈님_대학교사업(디유넷 협력사업).txt",
         "size": "67KB"
       }
+    ],
+    "status": "completed",
+    "preTopics": [],
+    "discussions": [],
+    "followups": [
+      {
+        "id": "1773900092056",
+        "text": "교사용 에이전트에 대한 1차 리뷰 일정을 잡아서  공유, 어떤 내용으로 중점적으로 할지 기획안",
+        "done": false,
+        "due": "2026-03-25"
+      }
     ]
   },
   {
