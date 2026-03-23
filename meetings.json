@@ -166,7 +166,7 @@
       {
         "id": "fu1",
         "text": "원광대 PDF 기능 3/30 개발 완료 확인",
-        "done": true,
+        "done": false,
         "due": "2026-03-30"
       },
       {
@@ -202,7 +202,13 @@
     ],
     "memo": "황태훈님 퇴사 전 인수인계 미팅. 노션 대학 향 프로덕트 현황 문서, 구글 드라이브 SaaS 요금표·GPU 견적서·계약서 양식 등 링크 공유됨. 세금계산서 발행(홈택스, 폰부스 전용) 별도 교육 예정.",
     "links": [],
-    "files": []
+    "files": [
+      {
+        "name": "0323_황태훈님_인수인계.txt",
+        "url": "https://raw.githubusercontent.com/ecologee/meetRecord/main/files/20260323_handover_taehoon/0323_황태훈님_인수인계.txt",
+        "size": "87KB"
+      }
+    ]
   },
   {
     "id": "20260319_dyunet_lunch",
