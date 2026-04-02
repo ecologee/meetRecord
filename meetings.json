@@ -1,5 +1,39 @@
 [
   {
+    "id": "20260402_디유넷_우석대_개발_건",
+    "date": "2026-04-02",
+    "dow": "목",
+    "title": "디유넷 우석대 개발 건",
+    "duration": "예정",
+    "attendees": "이민형, 신동희",
+    "type": "내부 회의",
+    "topics": [
+      "디유넷 LXP 연동 방안",
+      "원광대 영어강의 오류 해결 방안"
+    ],
+    "status": "planned",
+    "preTopics": [
+      {
+        "topic": "디유넷 LXP 연동 방안",
+        "notes": "기존 플랫폼과의 통합 구조 및 API 연동 계획"
+      },
+      {
+        "topic": "원광대 영어강의 오류 해결 방안",
+        "notes": "기존 이슈 분석 및 우석대 적용 시 예방책 수립"
+      }
+    ],
+    "discussions": [],
+    "followups": [],
+    "summary": "",
+    "agendas": [],
+    "actions": [],
+    "risks": [],
+    "opportunities": [],
+    "memo": "",
+    "links": [],
+    "files": []
+  },
+  {
     "id": "20260331_crowdworks_premeet",
     "date": "2026-03-31",
     "dow": "화",
