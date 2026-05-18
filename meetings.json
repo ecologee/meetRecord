@@ -204,7 +204,13 @@
     ],
     "memo": "창의재단 담당자 핵심 메시지: '기업이랑 같이 했더니 생태계가 학교에서 돌아가더라 — 이 케이스를 만들고 싶다.' 성과가 곧 차기 예산 근거. 이상훈 실장이 최종 협약서 수령 예정.",
     "links": [],
-    "files": []
+    "files": [
+      {
+        "name": "라이브데이터 내부 개발 킥오프 회의(정보교원연수)0518.txt",
+        "url": "https://raw.githubusercontent.com/ecologee/meetRecord/main/files/20260518_kofac_negotiation/라이브데이터 내부 개발 킥오프 회의(정보교원연수)0518.txt",
+        "size": "44KB"
+      }
+    ]
   },
   {
     "id": "20260518_kofac_dev_kickoff",
